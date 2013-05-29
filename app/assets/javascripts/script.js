@@ -3,7 +3,7 @@ $(document).ready(function () {
 	$("body").css({
 		overflow: "hidden"
 	});
-	//$("body").queryLoader2({onComplete: function() {
+	$("body").queryLoader2({onComplete: function() {
 		$("<div id='circleWindow'><div id='circleReveal'></div></div>").appendTo($("body"));
 		$("#logo").css({marginTop: "-" + $("#logo").height() / 2 + "px"});
 		$("nav").css({marginTop: "-"  + $("nav").height() + "px"});
@@ -76,12 +76,15 @@ $(document).ready(function () {
 				$(".hoverBar:eq(" + pos + ")").css({height: "0px"});
 			}
 		}
-		var bgColors = ["#33ddff", "#33ff77", "#8066ff", "#ff4c6a", "#ffff33"];
-		var buttonColors = ["#4cc3ff", "#45e57a", "#8066ff", "#ff4c6a", "#e5e52e"];
+		var bgColors;
+		var buttonColors;
+		bgColors = buttonColors = ["#00A0B0", "#6A4A3C", "#CC333F", "#EB6841", "#EDC951"];
+		//var bgColors = ["#33ddff", "#33ff77", "#8066ff", "#ff4c6a", "#ffff33"];
+		//var buttonColors = ["#4cc3ff", "#45e57a", "#8066ff", "#ff4c6a", "#e5e52e"];
 		for(var i = 0; i < $("nav li a").length; i++) {
 			$(".hoverBar:eq("+ i + ")").css({"background-color": buttonColors[i]});
 			$("nav li a:eq(" + i + ")").click(changeBg(i)).mouseover(overButton(i)).mouseout(outButton(i));
 		}
-	//}});
+	}});
 	
 });
