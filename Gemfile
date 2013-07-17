@@ -5,32 +5,33 @@ gem "pg", "~> 0.15.1"
 gem 'will_paginate', '3.0.3'
 gem 'slim-rails'
 gem 'rename'
+gem 'paperclip'
+gem 'omniauth-facebook'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 
 group :development, :test do
-  gem 'faker'
-  gem 'capybara'
-  gem 'rb-fchange'
-  gem 'rb-notifu'
-  gem 'win32console'
-  gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'headless'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
-  gem 'guard-livereload'
-  gem 'guard-rails'
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'passenger'
+  gem 'spork'
+  gem 'factory_girl_rails'
+
+  #guard!
   gem 'guard-rspec'
   gem 'guard-cucumber'
-  gem 'rack-livereload'
   gem 'guard-spork'
-  gem 'guard'
-  gem 'wdm'
-  gem 'childprocess'
-  gem 'spork'
+  gem 'guard-livereload'
+  gem 'rack-livereload'
+  gem 'guard-bundler'
+  gem 'guard-passenger'
 end
 
 # Gems used only for assets and not required
