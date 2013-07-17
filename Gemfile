@@ -7,6 +7,7 @@ gem 'slim-rails'
 gem 'rename'
 gem 'paperclip'
 gem 'omniauth-facebook'
+gem 'therubyracer'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -19,7 +20,7 @@ group :development, :test do
   gem 'headless'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-inotify'
   gem 'passenger'
   gem 'spork'
   gem 'factory_girl_rails'

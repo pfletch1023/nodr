@@ -125,6 +125,7 @@ GEM
     json (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
+    libv8 (3.11.8.17)
     listen (1.1.4)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -207,6 +208,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    ref (1.0.5)
     rename (1.0.0)
       rails (>= 3.0.0)
     rspec (2.11.0)
@@ -251,6 +253,9 @@ GEM
     sys-proctable (0.9.3)
     sys-proctable (0.9.3-x86-mingw32)
     temple (0.6.5)
+    therubyracer (0.11.4)
+      libv8 (~> 3.11.8.12)
+      ref
     thor (0.18.1)
     tilt (1.4.1)
     treetop (1.4.12)
@@ -290,12 +295,13 @@ DEPENDENCIES
   pg (~> 0.15.1)
   rack-livereload
   rails (= 3.2.13)
-  rb-fsevent
+  rb-inotify
   rename
   rspec-rails
   sass-rails (~> 3.2.3)
   selenium-webdriver
   slim-rails
   spork
+  therubyracer
   uglifier (>= 1.0.3)
   will_paginate (= 3.0.3)
