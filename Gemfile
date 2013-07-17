@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem "pg", "~> 0.15.1"
-gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 
 # Bundle edge Rails instead:
@@ -10,11 +9,26 @@ gem 'will_paginate', '3.0.3'
 
 
 group :development, :test do
-  gem 'rspec-rails', '2.11.0'
-  gem 'guard-rspec', '1.2.1'
-  gem 'guard-spork', '1.2.0'
-  gem 'childprocess', '0.3.6'
-  gem 'spork', '0.9.2'
+  gem 'faker'
+  gem 'capybara'
+  gem 'rb-fchange'
+  gem 'rb-notifu'
+  gem 'win32console'
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
+  gem 'guard-livereload'
+  gem 'guard-rails'
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
+  gem 'rack-livereload'
+  gem 'guard-spork'
+  gem 'guard'
+  gem 'wdm'
+  gem 'childprocess'
+  gem 'spork'
 end
 
 # Gems used only for assets and not required
@@ -45,15 +59,3 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
-
-group :development do
-  gem 'annotate', '2.5.0'
-end
-
-group :test do
-  gem 'capybara', '1.1.2'
-  gem 'rb-fchange', '0.0.5'
-  gem 'rb-notifu', '0.0.4'
-  gem 'win32console', '1.3.0'
-  gem 'factory_girl_rails', '4.1.0'
-end

@@ -26,9 +26,12 @@ development:
   #pool: 5
   #timeout: 5000
 
-test:
+test: &test
   adapter: postgresql
   host: localhost
   username: postgres
   password: hackEsack7
   database: itasa-test
+
+cucumber:
+  <<: *test
