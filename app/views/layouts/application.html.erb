@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>ITASA</title>
+	<title>Change Me!</title>
 	<%= stylesheet_link_tag    "application", :media => "all" %>
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
@@ -13,20 +13,6 @@
 </head>
 
 <body>
-	<header>
-		<nav>
-			<div id="buttons">
-				<ul>
-					<li><span class="hoverBar"></span><a href="#">HOME</a></li>
-					<li><span class="hoverBar"><a href="#">ABOUT</a></li>
-					<li><span class="hoverBar"><a href="#">REGISTER!</a></li>
-					<li><span class="hoverBar"><a href="#">SCHEDULE</a></li>
-					<li><span class="hoverBar"><a href="#">CONTACT</a></li>
-				</ul>
-			</div>
-		</nav>
-		<div id="bg"></div>
-	</header>
 	<%= yield %>
 </body>
 </html>

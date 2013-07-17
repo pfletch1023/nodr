@@ -9,7 +9,7 @@ development:
   host: localhost
   username: postgres
   password: hackEsack7
-  database: itasa-dev
+  database: rails-base-dev
 
 #development:
   #adapter: sqlite3
@@ -31,7 +31,7 @@ test: &test
   host: localhost
   username: postgres
   password: hackEsack7
-  database: itasa-test
+  database: rails-base-test
 
 cucumber:
   <<: *test
