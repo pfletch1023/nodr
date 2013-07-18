@@ -44,6 +44,10 @@ Spork.prefork do
     # the seed, which is printed after each run.
     #     --seed 1234
     config.order = "random"
+
+    # run only focus if there are focus examples
+    # config.filter_run focus: true
+    # config.run_all_with_everything_filtered = true
   end
 end
 
