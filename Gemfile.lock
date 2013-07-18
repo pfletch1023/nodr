@@ -295,7 +295,6 @@ DEPENDENCIES
   pg (~> 0.15.1)
   rack-livereload
   rails (= 3.2.13)
-  rb-inotify
   rename
   rspec-rails
   sass-rails (~> 3.2.3)

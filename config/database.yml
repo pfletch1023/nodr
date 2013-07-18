@@ -8,6 +8,7 @@ development:
   adapter: postgresql
   host: localhost
   username: postgres
+  password: zanzibar
   database: rails-base-dev
 
 # development:
@@ -29,6 +30,7 @@ test: &test
   adapter: postgresql
   host: localhost
   username: postgres
+  password: zanzibar
   database: rails-base-test
 
 cucumber:

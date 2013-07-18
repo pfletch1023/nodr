@@ -20,7 +20,6 @@ group :development, :test do
   gem 'headless'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
-  gem 'rb-inotify'
   gem 'passenger'
   gem 'spork'
   gem 'factory_girl_rails'
