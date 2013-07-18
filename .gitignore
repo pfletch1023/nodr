@@ -15,3 +15,15 @@
 /tmp
 
 /.vagrant
+
+*~
+*.lock
+*.swp
+*.DS_Store
+*.out
+
+rerun.txt
+
+*.sassc
+.sass-cache
+capybara-*.html

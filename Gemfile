@@ -7,7 +7,7 @@ gem 'slim-rails'
 gem 'rename'
 gem 'paperclip'
 gem 'omniauth-facebook'
-gem 'therubyracer'
+# gem 'therubyracer' # uncomment if using vagrant
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -20,7 +20,8 @@ group :development, :test do
   gem 'headless'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
-  gem 'passenger'
+  gem 'passenger' # comment if Windows
+  # gem 'wmd' # uncomment if Windows
   gem 'spork'
   gem 'factory_girl_rails'
 
@@ -31,7 +32,8 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'rack-livereload'
   gem 'guard-bundler'
-  gem 'guard-passenger'
+  gem 'guard-passenger' # comment if Windows and remove from Guardfile
+  # gem 'guard-rails' # uncomment if Windows and add to Guardfile
 end
 
 # Gems used only for assets and not required

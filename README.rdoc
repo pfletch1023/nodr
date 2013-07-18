@@ -1,6 +1,7 @@
 Whatever Marvin likes in his Rails apps is here.
 
-Works in any unix environment. Otherwise, use vagrant.
-
+To configure:
 1. rails g rename:app_to "whatever"
 2. edit config/database.yml
+
+Works in any unix environment. If on Windows, the gemfile contains instructions on what to comment or uncomment. Don't have any of the necessary software? Use vagrant.
