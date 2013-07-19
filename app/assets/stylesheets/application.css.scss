@@ -11,6 +11,9 @@
  *= require_self
  */
 
-@import 'partials/globals/reset';
-@import 'partials/globals/sessions';
-@import 'partials/home/home';
+@import 'globals/variables';
+@import 'globals/typography';
+@import 'globals/reset';
+@import 'globals/sessions';
+@import 'globals/flash';
+@import 'home/home';

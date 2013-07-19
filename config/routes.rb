@@ -1,6 +1,7 @@
 RailsBase::Application.routes.draw do
   root :to => 'static_pages#home'
 
+  match "/admin" => "admin#hub"
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
 

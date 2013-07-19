@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  attr_accessible :avatar, :email, :first_name, :last_name, :provider, :uid
+  attr_accessible :admin, :avatar, :email, :first_name, :last_name, :provider, :uid
 
-  validates_presence_of :avatar, :email, :first_name, :last_name, :provider, :uid
+  validates_presence_of :admin, :avatar, :email, :first_name, :last_name, :provider, :uid
 
   def self.create_with_omniauth(auth)
   	create! do |user|
@@ -16,6 +16,12 @@ class User < ActiveRecord::Base
   		if !user.avatar
   			user.avatar = "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.strip.downcase)}"
   		end
+      user.admin = user.admin_id?
   	end
+  end
+
+  def admin_id?
+    admins = { "facebook" => ["594889925"] }
+    admins[self.provider].include?(self.uid)
   end
 end
