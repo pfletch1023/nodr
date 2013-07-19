@@ -6,7 +6,7 @@ gem 'will_paginate', '3.0.3'
 gem 'slim-rails'
 gem 'rename'
 gem 'paperclip'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.0'
 # gem 'therubyracer' # uncomment if using vagrant
 
 # Bundle edge Rails instead:

@@ -145,9 +145,9 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
-    omniauth-facebook (1.4.1)
-      omniauth-oauth2 (~> 1.1.0)
-    omniauth-oauth2 (1.1.1)
+    omniauth-facebook (1.4.0)
+      omniauth-oauth2 (~> 1.0.2)
+    omniauth-oauth2 (1.0.3)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     paperclip (3.4.2)
@@ -273,7 +273,7 @@ DEPENDENCIES
   guard-spork
   headless
   jquery-rails
-  omniauth-facebook
+  omniauth-facebook (= 1.4.0)
   paperclip
   passenger
   pg (~> 0.15.1)
