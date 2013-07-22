@@ -7,6 +7,7 @@ gem 'slim-rails'
 gem 'rename'
 gem 'paperclip'
 gem 'omniauth-facebook', '1.4.0'
+gem 'bourbon'
 # gem 'therubyracer' # uncomment if using vagrant
 
 # Bundle edge Rails instead:
