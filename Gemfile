@@ -26,6 +26,7 @@ group :development, :test do
   # gem 'wmd' # uncomment if Windows
   gem 'spork'
   gem 'factory_girl_rails'
+  gem 'faker'
 
   #guard!
   gem 'guard-rspec'
