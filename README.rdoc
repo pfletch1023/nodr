@@ -1,8 +1,37 @@
 Whatever Marvin likes in his Rails apps is here.
 
+Works in any unix environment. If on Windows, the gemfile contains instructions on what to comment or uncomment. Don't have any of the necessary software? Use vagrant.
+
+Features:
+- Facebook authentication with admin support
+- Easily add other types of Omniauth authentication
+- Slim for templating
+- Coffeescript for scripting
+- Sass for style
+- Postgresql for databases
+- Paperclip for model attachments
+- Bourbon Sass mixin library
+- Better Errors
+- Rspec and Cucumber for testing
+- FactoryGirl and Faker to replace fixtures
+- Passenger server
+- Guard for automated rspec, cucumber, passenger, spork, bundler, and livereload
+
 To configure:
 1. rails g rename:app_to "whatever"
 2. edit config/database.yml
 3. add your Facebook app credentials to config/initializers/omniauth.rb
+4. bundle install
+5. rake db:create:all && rake db:migrate && rake db:test:prepare
 
-Works in any unix environment. If on Windows, the gemfile contains instructions on what to comment or uncomment. Don't have any of the necessary software? Use vagrant.
+To add another provider:
+1. Add the provider to /config/initializers/omniauth.rb
+2. Modify self.from_omniauth in /app/models/user.rb to find the appropriate fields in the returned hash
+3. Add buttons for sign in, sign out, etc.
+4. (Optional) Add client side code so the provider doesn't take the user away from the site.
+5. (Optional) Add administrators' uids for that site.
+NOTE: Users can only have their account connected to one provider at a time.
+
+To add admin users:
+1. Find the admin's uid for a given provider
+2. Add his/her uid to admins hash in /app/models/user.rb under the array for his/her provider
