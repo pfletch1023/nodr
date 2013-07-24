@@ -1,6 +1,6 @@
 Whatever Marvin likes in his Rails apps is here.
 
-Works in any unix environment. If on Windows, the gemfile contains instructions on what to comment or uncomment. Don't have any of the necessary software? Use vagrant.
+Works in any unix environment. If on Windows, "git checkout -b windows origin/windows" to get appropriate Gemfile. Don't have any of the necessary software? Use vagrant.
 
 Features:
 - Facebook authentication with admin support
@@ -14,7 +14,7 @@ Features:
 - Better Errors
 - Rspec and Cucumber for testing
 - FactoryGirl and Faker to replace fixtures
-- Passenger server
+- Passenger server (if on unix)
 - Guard for automated rspec, cucumber, passenger, spork, bundler, and livereload
 
 To configure:
