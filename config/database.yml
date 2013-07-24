@@ -8,7 +8,7 @@ development:
   adapter: postgresql
   host: localhost
   username: postgres
-  password: zanzibar
+  password: hackEsack7
   database: rails-base-dev
 
 # development:
@@ -30,7 +30,7 @@ test: &test
   adapter: postgresql
   host: localhost
   username: postgres
-  password: zanzibar
+  password: hackEsack7
   database: rails-base-test
 
 cucumber:
