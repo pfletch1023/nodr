@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :admin, :avatar, :email, :first_name, :last_name, :provider, :uid
 
-  validates_presence_of :admin, :avatar, :email, :first_name, :last_name, :provider, :uid
+  validates_presence_of :avatar, :email, :first_name, :last_name, :provider, :uid
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
       if !user.avatar
         user.avatar = "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.strip.downcase)}"
       end
-      user.admin = user.admin_id?
+      user.admin = false #user.admin_id?
       user.save!
     end
   end
