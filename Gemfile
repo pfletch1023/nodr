@@ -23,8 +23,7 @@ group :development, :test do
   gem 'headless'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
-  gem 'passenger' # comment if Windows
-  # gem 'wmd' # uncomment if Windows
+  gem 'passenger'
   gem 'spork'
   gem 'factory_girl_rails'
   gem 'faker'
@@ -36,8 +35,7 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'rack-livereload'
   gem 'guard-bundler'
-  gem 'guard-passenger' # comment if Windows and remove from Guardfile
-  # gem 'guard-rails' # uncomment if Windows and add to Guardfile
+  gem 'guard-passenger'
 end
 
 # Gems used only for assets and not required

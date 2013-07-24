@@ -27,3 +27,5 @@ rerun.txt
 *.sassc
 .sass-cache
 capybara-*.html
+
+bash.exe.stackdump
