@@ -30,6 +30,3 @@ test: &test
   host: localhost
   username: postgres
   database: rails-base-test
-
-cucumber:
-  <<: *test

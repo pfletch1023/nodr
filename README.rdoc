@@ -12,10 +12,10 @@ Features:
 - Paperclip for model attachments
 - Bourbon Sass mixin library
 - Better Errors
-- Rspec and Cucumber for testing
+- Rspec for testing
 - FactoryGirl and Faker to replace fixtures
 - Passenger server (if on unix)
-- Guard for automated rspec, cucumber, passenger, spork, bundler, and livereload
+- Guard for automated rspec, passenger, spork, bundler, and livereload
 
 To configure:
 1. rails g rename:app_to "whatever"
