@@ -9,9 +9,12 @@ class ApplicationController < ActionController::Base
 
   def authenticated
   	if current_user.nil?
+      session[:source] = request.path
   		flash[:error] = "You must be signed in to do that!"
   		redirect_to :root
   	end
+
+    fb_reconnect
   end
 
   def admin
@@ -20,5 +23,14 @@ class ApplicationController < ActionController::Base
   		flash[:error] = "You must be signed in to do that!"
   		redirect_to :root
   	end
+  end
+
+  def fb_reconnect
+    if current_user && current_user.oauth_expires_at < DateTime.now
+      session[:source] = request.path
+      reset_session
+      flash[:error] = "Please sign in again."
+      redirect_to :root
+    end
   end
 end
