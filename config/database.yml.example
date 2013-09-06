@@ -1,0 +1,12 @@
+connection: &connection
+  adapter: postgresql
+  host: localhost
+  username: postgres
+
+development:
+  <<: *connection
+  database: rails-base-dev
+
+test: &test
+  <<: *connection
+  database: rails-base-test
