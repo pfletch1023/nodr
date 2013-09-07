@@ -1,8 +1,8 @@
 class Link < ActiveRecord::Base
   
-  attr_accessible :parent_id, :parent_type, :node_id, :graph_id
+  attr_accessible :parent_id, :node_id, :graph_id
   
-  belongs_to :parent, polymorphic: true # Can be node or query
+  belongs_to :parent, foreign_key: :parent_id, class_name: "Node"
   belongs_to :child, foreign_key: :node_id, class_name: "Node"
   belongs_to :graph
   
