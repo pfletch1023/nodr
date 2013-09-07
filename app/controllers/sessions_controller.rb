@@ -1,14 +1,14 @@
 class SessionsController < ApplicationController
   
 	def new
-		graph = Graph.last
-	    nodes = graph.nodes
-	    edges = graph.links
+    graph = Graph.last
+       nodes = graph.nodes
+       edges = graph.links
 
-	    respond_to do |format|
-	      format.html
-	      format.json { render json: { graph: graph, nodes: nodes, edges: edges } }
-	    end
+       respond_to do |format|
+         format.html
+         format.json { render json: { graph: graph, nodes: nodes, edges: edges } }
+       end
 	end
   
 	def create

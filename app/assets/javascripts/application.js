@@ -16,3 +16,4 @@
 //= require sigma.min
 //= require tinycolor-min
 //= require_tree .
+//= require bootstrap
