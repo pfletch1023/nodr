@@ -10,5 +10,6 @@ Nodr::Application.routes.draw do
   match "/new_node" => "graphs#new_node"
   match "/new_link" => "graphs#new_link"
   match "/new_query" => "graphs#new_query"
+  match "/end_graph" => "graphs#end_graph"
   
 end

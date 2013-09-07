@@ -1,12 +1,40 @@
 class GraphsController < ApplicationController
   
   before_filter :authenticated
+  before_filter :check_current_graph, except: ["new_graph"]
+  
+  def check_current_graph
+    unless current_user.current_graph
+      respond_to do |format|
+        format.html { redirect_to :root }
+        format.json { render json: { error: "No current graph exists" }, status: :forbidden }
+      end
+    end
+  end
   
   def new_graph
-    graph = Graph.create(user_id: current_user.id)
-    respond_to do |format|
-      format.html { redirect_to :root }
-      format.json { render json: graph }
+    unless current_user.current_graph
+      graph = Graph.create(user_id: current_user.id)
+      respond_to do |format|
+        format.html { redirect_to :root }
+        format.json { render json: graph }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to :root }
+        format.json { render json: { error: "Open graph already exists" }, status: :forbidden }
+      end
+    end
+  end
+  
+  def end_graph
+    graph = current_user.current_graph
+    graph.end_at = DateTime.now()
+    if graph.save
+      respond_to do |format|
+        format.html { redirect_to :root }
+        format.json { render json: graph }
+      end
     end
   end
   
