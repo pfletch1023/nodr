@@ -15,7 +15,7 @@ class GraphsController < ApplicationController
     # Find or create node
     node = Node.where(url: params[:url]).first
     unless node
-      node = Node.create(title: params[:title] url: params[:url])
+      node = Node.create(title: params[:title], url: params[:url])
     end
     
     # Create null link

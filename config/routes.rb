@@ -6,9 +6,9 @@ Nodr::Application.routes.draw do
   match "/signout" => "sessions#destroy", :as => :signout
   
   # Graphs controller routes  
-  match "/new_graph" => "graphs#new_graph", via: :post
-  match "/new_node" => "graphs#new_node", via: :post
-  match "/new_link" => "graphs#new_link", via: :post
-  match "/new_query" => "graphs#new_query", via: :post
+  match "/new_graph" => "graphs#new_graph"
+  match "/new_node" => "graphs#new_node"
+  match "/new_link" => "graphs#new_link"
+  match "/new_query" => "graphs#new_query"
   
 end
