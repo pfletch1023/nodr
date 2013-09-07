@@ -9,4 +9,6 @@ class Node < ActiveRecord::Base
   has_many :links_from, source: :parent, class_name: "Link"
   has_many :links_to, source: :child, class_name: "Link"
   
+  validates_presence_of :title, :url
+  
 end

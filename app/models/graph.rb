@@ -12,4 +12,8 @@ class Graph < ActiveRecord::Base
     (child_nodes + parent_nodes).uniq
   end
   
+  def valid_url?(url)
+    return true
+  end
+  
 end
