@@ -38,4 +38,8 @@ class User < ActiveRecord::Base
   def fb_expired?
     self.oauth_expires_at < DateTime.now
   end
+  
+  def current_graph
+    graphs.where(end_at: nil).last
+  end
 end
