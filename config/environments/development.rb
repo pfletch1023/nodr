@@ -1,4 +1,4 @@
-RailsBase::Application.configure do
+Nodr::Application.configure do
   config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload)
   # Settings specified here will take precedence over those in config/application.rb
 

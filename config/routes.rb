@@ -1,4 +1,4 @@
-RailsBase::Application.routes.draw do
+Nodr::Application.routes.draw do
   root :to => 'static_pages#home'
 
   match "/admin" => "admin#hub"

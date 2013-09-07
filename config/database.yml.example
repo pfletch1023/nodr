@@ -5,8 +5,8 @@ connection: &connection
 
 development:
   <<: *connection
-  database: rails-base-dev
+  database: nodr-dev
 
 test: &test
   <<: *connection
-  database: rails-base-test
+  database: nodr-test

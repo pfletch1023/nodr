@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-RailsBase::Application.load_tasks
+Nodr::Application.load_tasks
