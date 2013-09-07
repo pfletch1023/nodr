@@ -13,6 +13,9 @@ class GraphsController < ApplicationController
       title: params[:title],
       url: params[:url]
     )
+    
+    # Create null link
+    null_link = Link.create(node_id: node.id, graph_id: current_user.current_graph.id)
     respond_with node
   end
   
@@ -25,8 +28,12 @@ class GraphsController < ApplicationController
     child_url = clean_url(params[:child][:url])
     child = Node.find_or_create_by_url(child_url)
     
-    #
-    # attr_accessible :parent_id, :parent_type, :node_id, :session_id
+    # Create link between parent and child
+    link = Link.new(node_id: child.id, graph_id: current_user.current_graph.id)
+    link.parent = parent
+    if link.save
+      respond_with link
+    end
   end
   
   def new_query

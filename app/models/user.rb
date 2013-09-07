@@ -34,4 +34,9 @@ class User < ActiveRecord::Base
   def facebook
     @facebook ||= Koala::Facebook::API.new(self.oauth_token)
   end
+  
+  def current_graph
+    graphs.where(end_at: nil).last
+  end
+  
 end
