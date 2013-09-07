@@ -24,23 +24,16 @@ ActiveRecord::Schema.define(:version => 20130907031447) do
 
   create_table "links", :force => true do |t|
     t.integer  "parent_id"
-    t.string   "parent_type"
     t.integer  "node_id"
     t.integer  "graph_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "nodes", :force => true do |t|
     t.string   "title"
     t.string   "url"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "queries", :force => true do |t|
-    t.string   "content"
-    t.string   "url"
+    t.integer  "node_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
