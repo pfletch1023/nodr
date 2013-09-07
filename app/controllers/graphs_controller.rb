@@ -1,7 +1,7 @@
 class GraphsController < ApplicationController
   
   before_filter :authenticated
-  before_filter :check_current_graph, except: ["new_graph"]
+  before_filter :check_current_graph, except: ["new"]
   
   def check_current_graph
     unless current_user.current_graph
@@ -13,6 +13,7 @@ class GraphsController < ApplicationController
   end
   
   def new
+    p "CURRENT GRAPH: #{current_user.current_graph} for user #{current_user ? current_user.email : ''}"
     unless current_user.current_graph
       graph = Graph.create(user_id: current_user.id)
       respond_to do |format|
