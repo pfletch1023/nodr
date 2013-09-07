@@ -4,6 +4,6 @@ class Link < ActiveRecord::Base
   
   belongs_to :parent, polymorphic: true # Can be node or query
   belongs_to :child, foreign_key: :node_id, class_name: "Node"
-  belongs_to :session
+  belongs_to :graph
   
 end

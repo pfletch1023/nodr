@@ -13,6 +13,15 @@
 
 ActiveRecord::Schema.define(:version => 20130907031447) do
 
+  create_table "graphs", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "end_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "links", :force => true do |t|
     t.integer  "parent_id"
     t.string   "parent_type"
@@ -34,15 +43,6 @@ ActiveRecord::Schema.define(:version => 20130907031447) do
     t.string   "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "sessions", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "name"
-    t.text     "description"
-    t.datetime "end_at"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|

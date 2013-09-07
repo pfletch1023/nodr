@@ -23,6 +23,8 @@ class ApplicationController < ActionController::Base
   		flash[:error] = "You must be signed in to do that!"
   		redirect_to :root
   	end
+
+    fb_reconnect
   end
 
   def fb_reconnect

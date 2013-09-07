@@ -1,6 +1,6 @@
-class CreateSessions < ActiveRecord::Migration
+class CreateGraphs < ActiveRecord::Migration
   def change
-    create_table :sessions do |t|
+    create_table :graphs do |t|
       t.integer :user_id
       t.string :name
       t.text :description

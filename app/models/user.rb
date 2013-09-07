@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   
   attr_accessible :admin, :avatar, :email, :first_name, :last_name, :provider, :uid, :oauth_token, :oauth_expires_at
   
-  has_many :sessions
+  has_many :graphs
   
   validates_presence_of :avatar, :email, :first_name, :last_name, :provider, :uid, :oauth_token, :oauth_expires_at
 
