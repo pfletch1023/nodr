@@ -12,4 +12,13 @@ class Graph < ActiveRecord::Base
     (child_nodes + parent_nodes).uniq
   end
   
+  def valid_url?(url)
+    listed_urls.where(listed_type: 0).each do |listed|
+      if listed.url == url
+        return false
+      end
+    end
+    return true
+  end
+  
 end

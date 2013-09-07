@@ -2,21 +2,13 @@ class GraphsController < ApplicationController
   
   before_filter :authenticated
   before_filter :check_current_graph, except: ["new_graph"]
+  skip_before_filter :verify_authenticity_token
   
   def check_current_graph
     unless current_user.current_graph
       respond_to do |format|
-        format.html { redirect_to :root }
-        format.json { render json: { error: "No current graph exists" }, status: :forbidden }
-      end
-    end
-  end
-  
-  def validate_url(url)
-    unless current_user.current_graph.valid_url?(url)
-      respond_to do |format|
-        format.html { redirect_to :root }
-        format.json { render json: { error: "URL is blacklisted" }, status: :forbidden }
+        format.html { return redirect_to :root }
+        format.json { return render json: { error: "No current graph exists" }, status: :forbidden }
       end
     end
   end
@@ -61,39 +53,75 @@ class GraphsController < ApplicationController
   end
   
   def new_node
-    # Find or create node
-    node = Node.where(url: params[:url]).first
-    unless node
-      node = Node.create(title: params[:title], url: params[:url])
-    end
-    
-    # Create null link
-    null_link = Link.new(graph_id: current_user.current_graph.id)
-    null_link.parent = node
-    if null_link.save
+    # Validate url
+    unless current_user.current_graph.valid_url?(params[:url])
       respond_to do |format|
-        format.html { redirect_to :root }
-        format.json { render json: node }
+        format.html { return redirect_to :root }
+        format.json { return render json: { error: "URL is blacklisted" }, status: :unprocessable_entity }
+      end
+    else
+      # Find or create node
+      node = Node.where(url: params[:url]).first
+      unless node
+        node = Node.new(title: params[:title], url: params[:url])
+      end
+      
+      if node.save
+        # Create null link
+        null_link = Link.new(graph_id: current_user.current_graph.id)
+        null_link.parent = node
+        respond_to do |format|
+          format.html { redirect_to :root }
+          if null_link.save
+            format.json { render json: node }
+          else
+            format.json { render json: null_link.errors, status: :unprocessable_entity }
+          end
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to :root }
+          format.json { render json: node.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
   
   def new_link
-    # Find or create parent
-    parent_url = clean_url(params[:parent][:url])
-    parent = Node.find_or_create_by_url(parent_url)
+    # Validate url
+    unless params[:child] && current_user.current_graph.valid_url?(params[:child][:url])
+      respond_to do |format|
+        format.html { return redirect_to :root }
+        format.json { return render json: { error: "URL is blacklisted" }, status: :unprocessable_entity }
+      end
+    else
+      # Find or create parent
+      parent_url = params[:parent][:url]
+      parent = Node.find_or_create_by_url(parent_url)
     
-    # Find or create child
-    child_url = clean_url(params[:child][:url])
-    child = Node.find_or_create_by_url(child_url)
+      # Find or create child
+      child_url = params[:child][:url]
+      child = Node.where(url: child_url).first
+      unless child
+        child = Node.new(url: child_url, title: params[:child][:title])
+        unless child.save
+          respond_to do |format|
+            format.html { redirect_to :root }
+            format.json { render json: child.errors, status: :unprocessable_entity }
+          end
+        end
+      end
     
-    # Create link between parent and child
-    link = Link.new(child_id: child.id, graph_id: current_user.current_graph.id)
-    link.parent = parent
-    if link.save
+      # Create link between parent and child
+      link = Link.new(child_id: child.id, graph_id: current_user.current_graph.id)
+      link.parent = parent
       respond_to do |format|
         format.html { redirect_to :root }
-        format.json { render json: link }
+        if link.save
+          format.json { render json: link }
+        else
+          format.json { render json: link.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

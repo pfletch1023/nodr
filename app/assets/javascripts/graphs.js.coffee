@@ -33,6 +33,8 @@ jQuery ->
 				sigInst.graphProperties
 					minNodeSize: 1,
 					maxNodeSize: 10
+				sigInst.mouseProperties
+					mouseEnabled: false
 
 				greyColor = "#444"
 				sigInst.bind('overnodes', (event) ->
