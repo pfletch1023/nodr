@@ -17,7 +17,6 @@
 /.vagrant
 
 *~
-*.lock
 *.swp
 *.DS_Store
 *.out
