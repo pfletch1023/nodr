@@ -12,7 +12,7 @@ class GraphsController < ApplicationController
     end
   end
   
-  def new_graph
+  def new
     unless current_user.current_graph
       graph = Graph.create(user_id: current_user.id)
       respond_to do |format|
@@ -22,9 +22,13 @@ class GraphsController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to :root }
-        format.json { render json: { error: "Open graph already exists" }, status: :forbidden }
+        format.json { render json: { error: "Current graph already exists" }, status: :forbidden }
       end
     end
+  end
+  
+  def show
+    @graph = Graph.find(params[:id])
   end
   
   def end_graph

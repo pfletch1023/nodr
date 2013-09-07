@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130907031447) do
+ActiveRecord::Schema.define(:version => 20130907165817) do
 
   create_table "graphs", :force => true do |t|
     t.integer  "user_id"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(:version => 20130907031447) do
     t.integer  "graph_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "listed_urls", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.integer  "listed_type"
+    t.integer  "graph_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "nodes", :force => true do |t|

@@ -4,7 +4,7 @@
     <title><%= yield(:title).empty? ? "Nodr: Browse Better" : yield(:title) %></title>
     <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
     <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= javascript_include_tag "jquery", "scrollto", "application" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <meta property="og:title" content="<%= yield(:title).empty? ? "Nodr: Browse Better" : yield(:title) %>" /> 
     <meta property="og:image" content="/assets/fb_logo.jpg" />
@@ -12,8 +12,7 @@
   </head>
 
   <body>
-    <%= render 'sessions/header' %>
-    <%= render 'globals/flash', :flash => flash %>
+    <%= render 'main/header' %>
     <%= yield %>
   </body>
 

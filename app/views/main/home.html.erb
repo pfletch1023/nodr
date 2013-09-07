@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <h1>Your Graphs</h1>
+  <% if !@graphs.empty? %>
+    <table class="table-striped">
+      <tr>
+        <th>Graph ID</th>
+        <th>Number of nodes</th>
+        <th></th>
+      </tr>
+      <% @graphs.each do |graph| %>
+        <tr>
+          <td><%= graph.id %></td>
+          <td><%= graph.nodes.count %></td>
+          <td><%= link_to "Examine", graph %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <div class="message">You haven't completed any graphs yet</div>
+  <% end %>
+</div>
