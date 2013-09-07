@@ -1,3 +1,24 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+jQuery ->
+
+	sigRoot = document.getElementById('sig')
+	sigInst = sigma.init(sigRoot)
+	sigInst.drawingProperties
+	  defaultLabelColor: '#fff',
+	    defaultLabelSize: 14,
+	    defaultLabelBGColor: '#fff',
+	    defaultLabelHoverColor: '#000',
+	    labelThreshold: 6,
+	    defaultEdgeType: 'curve'
+	sigInst.graphProperties
+	  minNodeSize: 5,
+	  maxNodeSize: 10
+	sigInst.addNode 'hello',
+		label: 'Hello',
+		x: Math.random(),
+		y: Math.random()
+	sigInst.addNode 'world',
+		label: 'World!',
+		x: Math.random(),
+  		y: Math.random()
+	sigInst.addEdge 'hello_world', 'hello', 'world'
+	sigInst.draw()

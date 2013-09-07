@@ -12,4 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require sigma.min
 //= require_tree .
