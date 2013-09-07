@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticated
-    if current_user.nil? || current_user.fb_expired?
+    if current_user.nil? || current_user && current_user.fb_expired?
+      reset_session
       respond_to do |format|
         format.html { redirect_to :root }
         format.json { render json: false }
