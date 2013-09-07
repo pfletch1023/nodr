@@ -97,7 +97,16 @@ class GraphsController < ApplicationController
     else
       # Find or create parent
       parent_url = params[:parent][:url]
-      parent = Node.find_or_create_by_url(parent_url)
+      parent = Node.where(url: parent_url).first
+      unless parent
+        parent = Node.new(url: parent_url, title: params[:parent][:title])
+        unless parent.save
+          respond_to do |format|
+            format.html { redirect_to :root }
+            format.json { render json: parent.errors, status: :unprocessable_entity }
+          end
+        end
+      end
     
       # Find or create child
       child_url = params[:child][:url]
