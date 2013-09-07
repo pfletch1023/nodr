@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.easing
 //= require sigma.min
 //= require tinycolor-min
 //= require_tree .

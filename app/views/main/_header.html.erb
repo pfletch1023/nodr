@@ -1,10 +1,13 @@
 <div id="sessions-bar">
-  <div id="sessions">
-    <% if current_user %>
-      <%= image_tag(current_user.avatar, size: "40x40", alt: "Avatar") %>
-      <%= link_to (current_user.first_name + " " + current_user.last_name), root_path %>
-      <%= link_to "Logout", signout_path, id: "sign_out" %>
-    <% end %>
-  </div>
+	<a href="/"><div id="logo">
+		<p>nodr</p>
+	</div></a>
+	<div id="sessions">
+		<% if current_user %>
+		  <%= image_tag(current_user.avatar, size: "40x40", alt: "Avatar") %>
+		  <%= link_to (current_user.first_name + " " + current_user.last_name), root_path %>
+		  <%= link_to "Logout", signout_path, id: "sign_out" %>
+		<% end %>
+	</div>
 </div>
 			
