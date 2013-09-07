@@ -13,6 +13,11 @@ class Graph < ActiveRecord::Base
   end
   
   def valid_url?(url)
+    listed_urls.where(listed_type: 0).each do |listed|
+      if listed.url == url
+        return false
+      end
+    end
     return true
   end
   

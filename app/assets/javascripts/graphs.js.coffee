@@ -25,6 +25,8 @@ jQuery ->
 	sigInst.graphProperties
 		minNodeSize: 1,
 		maxNodeSize: 10
+	sigInst.mouseProperties
+	  mouseEnabled: false
 
 	greyColor = "#444"
 	sigInst.bind('overnodes', (event) ->
@@ -79,8 +81,8 @@ jQuery ->
 			for node in nodes
 				sigInst.addNode node.id,
 					label: node.title,
-					x: Math.random(),
-					y: Math.random(),
+					x: Math.random() * 2.6 - 1.3
+					y: Math.random() * 0.8,
 					url: node.url
 			for edge in edges
 				sigInst.addEdge edge.parent_id + '-' + edge.child_id, edge.parent_id, edge.child_id
