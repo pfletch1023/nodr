@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :node do
+  	title { Faker::Lorem.words.join(" ") }
+  	url { "http://" + Faker::Internet.domain_name }
   end
 end

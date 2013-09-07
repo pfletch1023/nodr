@@ -29,6 +29,15 @@ class GraphsController < ApplicationController
   
   def show
     @graph = Graph.find(params[:id])
+
+    graph = current_user.current_graph
+    nodes = graph.nodes
+    edges = graph.links
+
+    respond_to do |format|
+      format.html
+      format.json { render json: { graph: graph, nodes: nodes, edges: edges } }
+    end
   end
   
   def end_graph

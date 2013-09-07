@@ -5,3 +5,18 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+n_n = 20
+n_l = 50
+
+g = FactoryGirl.create(:graph)
+ns = FactoryGirl.create_list(:node, n_n)
+n_l.times do
+	parent = rand(n_n)
+	child = rand(n_n)
+	while child == parent || g.links.where(parent_id: ns[parent].id, child_id: ns[child].id).count > 0
+		child = rand(n_n)
+		parent = rand(n_n)
+	end
+	FactoryGirl.create(:link, graph: g, parent: ns[parent], child: ns[child])
+end

@@ -2,6 +2,5 @@
 
 FactoryGirl.define do
   factory :link do
-    String "MyString"
   end
 end
