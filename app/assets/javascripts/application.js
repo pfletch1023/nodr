@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require sigma.min
+//= require tinycolor-min
 //= require_tree .

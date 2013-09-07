@@ -14,7 +14,7 @@ ns = FactoryGirl.create_list(:node, n_n)
 n_l.times do
 	parent = rand(n_n)
 	child = rand(n_n)
-	while child == parent || g.links.where(parent_id: ns[parent].id, node_id: ns[child].id).count > 0
+	while child == parent || g.links.where(parent_id: ns[parent].id, child_id: ns[child].id).count > 0
 		child = rand(n_n)
 		parent = rand(n_n)
 	end
