@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
       reset_session
       respond_to do |format|
         format.html { redirect_to :root }
-        format.json { render status: :forbidden }
+        format.json { render json: {error: "Unauthorized"}, status: :unauthorized }
       end
     end
   end
