@@ -13,7 +13,6 @@ class GraphsController < ApplicationController
   end
   
   def new
-    p "CURRENT GRAPH: #{current_user.current_graph} for user #{current_user ? current_user.email : ''}"
     unless current_user.current_graph
       graph = Graph.create(user_id: current_user.id)
       respond_to do |format|
@@ -89,7 +88,6 @@ class GraphsController < ApplicationController
   
   def new_link
     p "PARAMS: #{params}"
-    p "CHILD: #{params.child}"
     p "UNESCAPE: #{JSON.parse(URI.unescape(params))}"
     
     params = JSON.parse(URI.unescape(params))
