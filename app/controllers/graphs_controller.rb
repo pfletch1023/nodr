@@ -27,6 +27,17 @@ class GraphsController < ApplicationController
     end
   end
   
+  def end_graph
+    graph = current_user.current_graph
+    graph.end_at = DateTime.now()
+    if graph.save
+      respond_to do |format|
+        format.html { redirect_to :root }
+        format.json { render json: graph }
+      end
+    end
+  end
+  
   def new_node
     # Find or create node
     node = Node.where(url: params[:url]).first
