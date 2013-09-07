@@ -2,8 +2,8 @@ if Rails.env == "production"
 	ENV['fb_app_id'] = "FILL IN" 
 	ENV['fb_secret'] = "FILL IN"
 else
-	ENV['fb_app_id'] = '343629322437383'
-	ENV['fb_secret'] = '7e510c5b72f620481bf44d5873914161'
+	ENV['fb_app_id'] = '572459842812961'
+	ENV['fb_secret'] = '09dd5858d4e06bc66b803f87dbb6dfdc'
 end
 
 ENV['fb_permissions'] = "email" # e.g. create_event, user_groups, publish_stream
