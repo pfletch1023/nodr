@@ -1,1 +1,19 @@
 <div id="sig"></div>
+
+<div class="wrapper">
+  <%= link_to "Add Listed Urls", new_listed_url_path(id: @graph.id) %>
+  <table>
+    <tr>
+      <th>Link Title</th>
+      <th>URL</th>
+      <th>Type</th>
+    </tr>
+    <% @graph.listed_urls.each do |url| %>
+      <tr>
+        <td><%= url.title %></td>
+        <td><%= url.url %></td>
+        <td><%= url.listed_type > 0 ? "Whitelisted" : "Blacklisted" %>
+      </tr>
+    <% end %>
+  </table>
+</div>

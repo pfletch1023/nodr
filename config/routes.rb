@@ -1,7 +1,7 @@
 Nodr::Application.routes.draw do
   
   root :to => 'main#home'
-  resources :graphs
+  resources :graphs, :listed_urls
 
   match "/admin" => "admin#hub"
   match "/login" => "sessions#new"
@@ -14,5 +14,7 @@ Nodr::Application.routes.draw do
   match "/new_link" => "graphs#new_link"
   match "/new_query" => "graphs#new_query"
   match "/end_graph" => "graphs#end_graph"
+  
+  match "/graphs/:id/listed_urls/new" => "listed_urls#new", as: "new_listed_url"
   
 end

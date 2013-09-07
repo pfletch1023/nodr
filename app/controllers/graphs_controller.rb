@@ -12,6 +12,15 @@ class GraphsController < ApplicationController
     end
   end
   
+  def validate_url(url)
+    unless current_user.current_graph.valid_url?(url)
+      respond_to do |format|
+        format.html { redirect_to :root }
+        format.json { render json: { error: "URL is blacklisted" }, status: :forbidden }
+      end
+    end
+  end
+  
   def new
     unless current_user.current_graph
       graph = Graph.create(user_id: current_user.id)

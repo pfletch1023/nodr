@@ -7,4 +7,6 @@ class ListedUrl < ActiveRecord::Base
   
   belongs_to :graph
   
+  validates_presence_of :title, :url, :graph_id, :listed_type
+  
 end
