@@ -11,7 +11,7 @@ jQuery ->
 		this.iterNodes (node) ->
 			node.color = tinycolor("hsv(" + mainColor + ", " + (Math.floor(100 * node.degree / biggest)) + "%, " + (Math.floor(100 * node.degree / biggest)) + "%)").toHex()
 		this.drawingProperties
-			labelThreshold: biggest + 2
+			labelThreshold: biggest * 2
 
 	sigRoot = document.getElementById('sig')
 	sigInst = sigma.init(sigRoot)
@@ -53,7 +53,7 @@ jQuery ->
 				n.attr['grey'] = 0
 				n.forceLabel = true
 		sigInst.draw(2, 2, 2)
-	).bind 'outnodes', ->
+	).bind('outnodes', ->
 		sigInst.iterEdges (e) ->
 			e.color = if e.attr['grey'] then e.attr['true_color'] else e.color
 			e.attr['grey'] = 0
@@ -62,6 +62,11 @@ jQuery ->
 			n.attr['grey'] = 0
 			n.forceLabel = false
 		sigInst.draw(2,2,2)
+	).bind 'downnodes', (event) ->
+		ns = event.content
+		sigInst.iterNodes (n) ->
+			if ns.indexOf(n.id) >= 0
+				window.open(n.attr['url'],'_blank');
 
 	$.ajax
 		method: "GET",
@@ -76,7 +81,7 @@ jQuery ->
 					label: node.title,
 					x: Math.random(),
 					y: Math.random(),
-					attr: { "url": node.url }
+					url: node.url
 			for edge in edges
 				sigInst.addEdge edge.parent_id + '-' + edge.child_id, edge.parent_id, edge.child_id
 			sigInst.degreeToSize()
