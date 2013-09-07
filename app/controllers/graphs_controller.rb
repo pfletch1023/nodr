@@ -2,6 +2,7 @@ class GraphsController < ApplicationController
   
   before_filter :authenticated
   before_filter :check_current_graph, except: ["new_graph"]
+  skip_before_filter :verify_authenticity_token
   
   def check_current_graph
     unless current_user.current_graph
