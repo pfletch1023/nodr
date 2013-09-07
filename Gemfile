@@ -9,7 +9,6 @@ gem 'paperclip'
 gem 'omniauth-facebook', '1.4.0'
 gem 'bourbon'
 gem 'koala'
-gem 'thin'
 # gem 'therubyracer' # uncomment if using vagrant
 
 # Bundle edge Rails instead:
