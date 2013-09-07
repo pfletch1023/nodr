@@ -3,6 +3,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
   skip_before_filter :verify_authenticity_token, if: :json_request?
+  before_filter :set_access_control_headers
+
+  def set_access_control_headers 
+    headers['Access-Control-Allow-Origin'] = '*' 
+    headers['Access-Control-Request-Method'] = '*' 
+  end
 
   protected
 
