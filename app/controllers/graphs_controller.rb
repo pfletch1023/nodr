@@ -1,7 +1,6 @@
 class GraphsController < ApplicationController
   
   before_filter :authenticated
-  respond_to :html, :json
   
   def new_graph
     graph = Graph.create(user_id: current_user.id)

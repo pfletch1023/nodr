@@ -34,9 +34,12 @@ class User < ActiveRecord::Base
   def facebook
     @facebook ||= Koala::Facebook::API.new(self.oauth_token)
   end
+
+  def fb_expired?
+    self.oauth_expires_at < DateTime.now
+  end
   
   def current_graph
     graphs.where(end_at: nil).last
   end
-  
 end
