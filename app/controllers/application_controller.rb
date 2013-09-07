@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery
   helper_method :current_user
-  skip_before_action :verify_authenticity_token, if: :json_request?
+  skip_before_filter :verify_authenticity_token, if: :json_request?
 
   protected
 
