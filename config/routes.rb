@@ -7,6 +7,7 @@ Nodr::Application.routes.draw do
   match "/login" => "sessions#new"
   match "/auth/:provider/callback" => "sessions#create"
   match "/logout" => "sessions#destroy", :as => :signout
+  match "/user" => "sessions#user"
   
   # Graphs controller routes  
   match "/new_graph" => "graphs#new"

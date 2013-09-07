@@ -15,4 +15,9 @@ class SessionsController < ApplicationController
 		reset_session
 		redirect_to :root, :notice => "Signed out!"
 	end
+	
+	def user
+	  render json: current_user
+	end
+	
 end
