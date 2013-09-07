@@ -2,14 +2,12 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery
   helper_method :current_user
-  before_filter :verified_request?
-  
-  def verified_request?
-    if request.content_type == "application/json"
-      true
-    else
-      super
-    end
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
+  protected
+
+  def json_request?
+    request.format.json?
   end
 
   private
