@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     if current_user.nil? || current_user.fb_expired?
       respond_to do |format|
         format.html { redirect_to :root }
-        format.json { render json: false }
+        format.json { render status: :forbidden }
       end
     end
   end
