@@ -4,7 +4,7 @@ class CreateLinks < ActiveRecord::Migration
       t.integer :parent_id
       t.string :parent_type
       t.integer :node_id
-      t.integer :session_id
+      t.integer :graph_id
 
       t.timestamps
     end

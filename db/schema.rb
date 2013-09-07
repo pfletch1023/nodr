@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20130907031447) do
     t.integer  "parent_id"
     t.string   "parent_type"
     t.integer  "node_id"
-    t.integer  "session_id"
+    t.integer  "graph_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
