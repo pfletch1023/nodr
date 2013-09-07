@@ -1,7 +1,32 @@
+body {
+  @include HN-Regular;
+}
+
 p {
 	font-size: 72px;
 	text-align: center;
 	margin-top: 2em;
+}
+
+.wrapper {
+  width: $wrapper-width;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.message {
+  width: 600px;
+  margin: auto;
+  background: #eee;
+  text-align: center;
+  padding: 40px 0;
+  margin-top: 30px;
+}
+
+h1 {
+  @include HN-Bold;
+  text-align: center;
+  font-size: 3em;
 }
 
 #sig {
@@ -12,4 +37,31 @@ p {
 	height: 40em;
 	background: #212221;
 	border-radius: 0.5em;
+	margin-bottom: 100px;
+}
+
+// Login page
+.facebook {
+  margin-top: 30px;
+  .user_fb {
+    background-image: url("/assets/facebook_logo.png");
+    background-repeat: no-repeat;
+    background-size: auto 46px;
+    width: 272px;
+    margin: auto;
+    height: 46px;
+    cursor: pointer;
+    a {
+      text-align: center;
+      background-image: url("/assets/facebook_bg.png");
+      background-repeat: no-repeat;
+      background-size: 225px 46px;
+      display: block;
+      line-height: 46px;
+      text-decoration: none;
+      margin-left: 46px;
+      color: white;
+      font-size: 16px;
+    }
+  }
 }

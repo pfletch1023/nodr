@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
+  
   protect_from_forgery
   helper_method :current_user
 
   private
+  
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
@@ -11,7 +13,7 @@ class ApplicationController < ActionController::Base
     if current_user.nil? || current_user && current_user.fb_expired?
       reset_session
       respond_to do |format|
-        format.html { redirect_to :root }
+        format.html { redirect_to login_path }
         format.json { render json: {error: "Unauthorized"}, status: :unauthorized }
       end
     end

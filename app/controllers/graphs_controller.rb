@@ -12,7 +12,16 @@ class GraphsController < ApplicationController
     end
   end
   
-  def new_graph
+  def validate_url(url)
+    unless current_user.current_graph.valid_url?(url)
+      respond_to do |format|
+        format.html { redirect_to :root }
+        format.json { render json: { error: "URL is blacklisted" }, status: :forbidden }
+      end
+    end
+  end
+  
+  def new
     unless current_user.current_graph
       graph = Graph.create(user_id: current_user.id)
       respond_to do |format|
@@ -22,8 +31,21 @@ class GraphsController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to :root }
-        format.json { render json: { error: "Open graph already exists" }, status: :forbidden }
+        format.json { render json: { error: "Current graph already exists" }, status: :forbidden }
       end
+    end
+  end
+  
+  def show
+    @graph = Graph.find(params[:id])
+
+    graph = current_user.current_graph
+    nodes = graph.nodes
+    edges = graph.links
+
+    respond_to do |format|
+      format.html
+      format.json { render json: { graph: graph, nodes: nodes, edges: edges } }
     end
   end
   

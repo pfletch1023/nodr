@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <%= form_for @listed_url do |f| %>
+    <%= f.hidden_field :graph_id, value: @graph.id %>
+    <%= f.text_field :title, placeholder: "Page title" %>
+    <%= f.text_field :url, placeholder: "URL" %>
+    <%= f.select :listed_type, options_for_select([["Blacklisted", 0], ["Whitelisted", 1]]), prompt: "--Listed Type--" %>
+    <%= f.submit %>
+  <% end %>
+</div>

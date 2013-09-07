@@ -12,10 +12,8 @@
  */
 
 @import 'bourbon';
-
 @import 'globals/variables';
 @import 'globals/typography';
 @import 'globals/reset';
-@import 'globals/sessions';
-@import 'globals/flash';
+@import 'globals/header';
 @import 'home/home';

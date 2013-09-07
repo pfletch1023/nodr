@@ -4,6 +4,7 @@ class Graph < ActiveRecord::Base
   
   belongs_to :user
   has_many :links
+  has_many :listed_urls
   has_many :child_nodes, through: :links, source: :child
   has_many :parent_nodes, through: :links, source: :parent
   

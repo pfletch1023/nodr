@@ -70,7 +70,7 @@ jQuery ->
 
 	$.ajax
 		method: "GET",
-		url: "http://localhost:3000/",
+		url: window.location.pathname,
 		dataType: "json",
 		success: (data) ->
 			graph = data["graph"]
@@ -85,4 +85,4 @@ jQuery ->
 			for edge in edges
 				sigInst.addEdge edge.parent_id + '-' + edge.child_id, edge.parent_id, edge.child_id
 			sigInst.degreeToSize()
-			sigInst.draw()
+			sigInst.activateFishEye().draw()
