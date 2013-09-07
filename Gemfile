@@ -23,7 +23,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'headless'
   gem 'database_cleaner'
-  gem 'passenger'
   gem 'spork'
   gem 'factory_girl_rails'
   gem 'faker'
@@ -34,7 +33,6 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'rack-livereload'
   gem 'guard-bundler'
-  gem 'guard-passenger'
 end
 
 # Gems used only for assets and not required
