@@ -1,11 +1,13 @@
 class GraphsController < ApplicationController
   
   before_filter :authenticated
-  respond_to :html, :json
   
   def new_graph
     graph = Graph.create(user_id: current_user.id)
-    respond_with graph
+    respond_to do |format|
+      format.html { redirect_to :root }
+      format.json { render json: graph }
+    end
   end
   
   def new_node
