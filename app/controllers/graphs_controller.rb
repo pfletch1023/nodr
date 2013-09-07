@@ -11,14 +11,21 @@ class GraphsController < ApplicationController
   end
   
   def new_node
-    node = Node.create(
-      title: params[:title],
-      url: params[:url]
-    )
+    # Find or create node
+    node = Node.where(url: params[:url]).first
+    unless node
+      node = Node.create(title: params[:title], url: params[:url])
+    end
     
     # Create null link
-    null_link = Link.create(node_id: node.id, graph_id: current_user.current_graph.id)
-    respond_with node
+    null_link = Link.new(graph_id: current_user.current_graph.id)
+    null_link.parent = node
+    if null_link.save
+      respond_to do |format|
+        format.html { redirect_to :root }
+        format.json { render json: node }
+      end
+    end
   end
   
   def new_link
@@ -34,12 +41,29 @@ class GraphsController < ApplicationController
     link = Link.new(node_id: child.id, graph_id: current_user.current_graph.id)
     link.parent = parent
     if link.save
-      respond_with link
+      respond_to do |format|
+        format.html { redirect_to :root }
+        format.json { render json: link }
+      end
     end
   end
   
   def new_query
+    # Find or create query
+    query = Query.where(url: params[:url]).first
+    unless query
+      query = Query.create(content: params[:content], url: params[:url])
+    end
     
+    # Create null link
+    null_link = Link.new(graph_id: current_user.current_graph.id)
+    null_link.parent = query
+    if null_link.save
+      respond_to do |format|
+        format.html { redirect_to :root }
+        format.json { render json: query }
+      end
+    end
   end
   
 end
