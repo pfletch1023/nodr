@@ -1,1 +1,0 @@
-AlchemyAPI.key = "5f1e545f0e2b4f263783d3accebdb081f44436d3"

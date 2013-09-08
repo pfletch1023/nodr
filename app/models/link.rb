@@ -28,8 +28,8 @@ class Link < ActiveRecord::Base
   end
 
   def relation_factor
-  	p_results = AlchemyAPI::KeywordExtraction.new.search(url: self.parent.url)
-  	c_results = AlchemyAPI::KeywordExtraction.new.search(url: self.child.url)
+  	p_results = JSON.parse(HTTParty.get("http://access.alchemyapi.com/calls/url/URLGetRankedKeywords?apikey=5f1e545f0e2b4f263783d3accebdb081f44436d3&outputMode=json&url=#{self.parent.url}").body)["keywords"]
+  	c_results = JSON.parse(HTTParty.get("http://access.alchemyapi.com/calls/url/URLGetRankedKeywords?apikey=5f1e545f0e2b4f263783d3accebdb081f44436d3&outputMode=json&url=#{self.child.url}").body)["keywords"]
   	rf = 0
   	p_results.each do |pr|
   		c_results.each do |cr|
