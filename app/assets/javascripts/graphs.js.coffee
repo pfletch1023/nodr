@@ -67,8 +67,8 @@ jQuery ->
 					defaultLabelHoverColor: '#000',
 					font: 'Century Gothic',
 				sigInst.graphProperties
-					minNodeSize: 1,
-					maxNodeSize: 10
+					minNodeSize: 3,
+					maxNodeSize: 21
 				sigInst.mouseProperties
 					mouseEnabled: true
 
