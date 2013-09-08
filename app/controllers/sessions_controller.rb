@@ -1,15 +1,5 @@
 class SessionsController < ApplicationController
   
-	def new
-	  nodes = Node.all.sort { |a,b| a.created_at <=> b.created_at }
-	  edges = Link.all
-
-       respond_to do |format|
-         format.html
-         format.json { render json: { nodes: nodes, edges: edges } }
-       end
-	end
-  
 	def create
 		user = User.from_omniauth(env["omniauth.auth"])
 		session[:user_id] = user.id

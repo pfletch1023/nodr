@@ -38,8 +38,8 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
   clear: none;
   text-align: right;
-  @media only screen and (max-width: 768px) {
-    padding-bottom: 1em;
+  li img {
+    margin-right: 1em;
   }
 }
 #main-nav {
@@ -106,7 +106,27 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
   #cards {
+    ul {
+      list-style: disc inside none;
+    }
+    ol {
+      list-style: decimal inside none;
+    }
+    li {
+      padding: 0.5em;
+    }
     padding: 2em;
+    .card {
+      @media only screen and (max-width: 991px) {
+        border-radius: 0.5em;
+      }
+      .title {
+        @media only screen and (max-width: 991px) {
+          border-top-left-radius: 0.25em;
+          border-top-right-radius: 0.25em;
+        }
+      }
+    }
   }
 }
 #footer {

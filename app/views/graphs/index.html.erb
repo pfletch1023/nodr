@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <h1>Your Graphs</h1>
-    </br>
     <% if !@graphs.empty? %>
+        <h1>Your Graphs</h1>
+        </br>
         <% @graphs.each do |graph| %>
           <div class="card">
             <div class="title">
@@ -13,7 +13,7 @@
           </div>
         <% end %>
     <% else %>
-      <div class="message">You haven't completed any graphs yet</div>
+      <h1>You haven't completed any graphs yet!</h1>
     <% end %>
   </div>
 </div>

@@ -4,10 +4,8 @@ Nodr::Application.routes.draw do
   resources :graphs, :listed_urls
 
   match "/admin" => "admin#hub"
-  match "/login" => "sessions#new", :as => :login
   match "/auth/:provider/callback" => "sessions#create"
   match "/logout" => "sessions#destroy", :as => :signout
-  match "/pref" =>  "sessions#pref"
   match "/user" => "sessions#user"
   match "/graphs" => "graphs#index"
   
