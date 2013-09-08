@@ -52,12 +52,11 @@ class GraphsController < ApplicationController
   end
   
   def new_node
-    p "PARAMS: #{params}"
-    p "PARAMS: #{params['params']}"
+    # Parse attributes
     attrs = JSON.parse(params['params'])
-    p "ATTRS: #{attrs}"
     
     # Validate url
+    p "URL: #{attrs[:url]}, TITLE: #{attrs[:title]}"
     unless current_user.current_graph.valid_url?(attrs[:url])
       respond_to do |format|
         format.html { return redirect_to :root }
