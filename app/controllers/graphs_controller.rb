@@ -171,11 +171,8 @@ class GraphsController < ApplicationController
   
   # Return recommendations
   def node_recommendations
-    recommendations = Node.find(params[:id]).get_recommendations
-    respond_to do |format|
-      format.html { redirect_to :root }
-      format.json { render json: recommendations }
-    end
+    node = Node.where(url: clean_url(params["url"])).first
+    render json: node.get_recommendations
   end
   
 end
