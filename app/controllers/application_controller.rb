@@ -35,4 +35,8 @@ class ApplicationController < ActionController::Base
       redirect_to :root
     end
   end
+  
+  def clean_url(url)
+    url.gsub(/\/$/, "")
+  end
 end
