@@ -12,14 +12,16 @@ class Link < ActiveRecord::Base
   after_create :create_weighted
 
   def create_weighted
-  	exist = EdgeWeight.where(parent_id: self.parent.id, child_id: self.child.id).first
-  	if exist
-  		exist.value = exist.value + 0.5
-  		exist.save
-  	else
-  		weight = EdgeWeight.new(parent_id: self.parent.id, child_id: self.child.id, value: 1 + self.relation_factor)
-  		weight.save
-  	end
+    if self.child
+    	exist = EdgeWeight.where(parent_id: self.parent.id, child_id: self.child.id).first
+    	if exist
+    		exist.value = exist.value + 0.5
+    		exist.save
+    	else
+    		weight = EdgeWeight.new(parent_id: self.parent.id, child_id: self.child.id, value: 1 + self.relation_factor)
+    		weight.save
+    	end
+    end
   end
 
   def relation_factor
