@@ -45,7 +45,7 @@ jQuery ->
 			dataType: "json",
 			success: (data) ->
 				mainColor = Math.floor(Math.random() * 360)
-				secondColor = if mainColor >= 180 then mainColor - 180 + Math.floor(Math.random() * 120 - 60) else mainColor + 180 + Math.floor(Math.random() * 120 - 60)
+				secondColor = if mainColor >= 180 then mainColor - 180 + Math.floor(Math.random() * 180 - 90) else mainColor + 180 + Math.floor(Math.random() * 180 - 90)
 
 				sigma.publicPrototype.degreeToSize = ->
 					biggest = 0
