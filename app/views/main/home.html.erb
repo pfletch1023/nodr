@@ -3,24 +3,15 @@
         <h1>Your Graphs</h1>
         </br>
         <% if !@graphs.empty? %>
-          <table class="table table-striped">
-            <tr>
-              <th>Graph ID</th>
-              <th>Name</th>
-              <th>Number of nodes</th>
-              <th>Description</th>
-              <th></th>
-            </tr>
             <% @graphs.each do |graph| %>
-              <tr>
-                <td><%= graph.id %></td>
-                <td><%= graph.name %></td>
-                <td><%= graph.nodes.count %></td>
-                <td><%= graph.description %></td>
-                <td><%= link_to "Examine", graph %></td>
-              </tr>
+              <div class="card">
+                <div class="title">
+                  <div class="name"><%= link_to graph.name, graph %></div>
+                  <div class="count"><span><%= "#{graph.nodes.count} nodes" %></span></div>
+                </div>
+                <div class="description"><%= graph.description %></div>
+              </div>
             <% end %>
-          </table>
         <% else %>
           <div class="message">You haven't completed any graphs yet</div>
         <% end %>
