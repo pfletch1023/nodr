@@ -33,6 +33,54 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0;
 }
 
+#second-nav {
+  display: inline-block;
+  clear: none;
+  text-align: right;
+}
+#main-nav {
+  display: inline-block;
+}
+
 .hide {
   display: hidden;
+}
+
+.card {
+  box-shadow: 0px 2px 3px #101010;
+  border-radius: 0.5em;
+  margin-bottom: 2em;
+  @media only screen and (max-width: 991px) {
+    border-radius: 0;
+  }
+  background: #ccc;
+  .title {
+    border-top-left-radius: 0.25em;
+    border-top-right-radius: 0.25em;
+    @media only screen and (max-width: 991px) {
+      border-radius: 0;
+    }
+    border-bottom: 1px solid #bbb;
+    font-size: 2em;
+    padding: 1em;
+    background: #ddd;
+    color: #333;
+    .name, .count {
+      display: inline-block;
+      width: 49%;
+    }
+    .count {
+      text-align: right;
+      span {
+        padding: 0.3em 0.5em;
+        background: #45ADA8;
+        border-radius: 0.25em;
+        color: #ddd;
+      }
+    }
+  }
+  .description {
+    padding: 2em;
+    color: #333;
+  }
 }
