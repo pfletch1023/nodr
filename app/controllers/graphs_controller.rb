@@ -23,7 +23,7 @@ class GraphsController < ApplicationController
   # Unless current graph exists
   def new
     unless current_user.current_graph
-      graph = Graph.create(name: params[:name], description: params[:desc], user_id: current_user.id)
+      graph = Graph.create(user_id: current_user.id)
       respond_to do |format|
         format.html { redirect_to :root }
         format.json { render json: graph }
