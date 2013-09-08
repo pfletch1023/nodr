@@ -52,6 +52,7 @@ class GraphsController < ApplicationController
   end
   
   def new_node
+    params = JSON.parse(URI.unescape(params[:params]))
     # Validate url
     unless current_user.current_graph.valid_url?(params[:url])
       respond_to do |format|
@@ -87,11 +88,7 @@ class GraphsController < ApplicationController
   end
   
   def new_link
-    p "PARAMS: #{params}"
-    p "COUNT: #{params.count}"
-    p "PARAMS: #{URI.unescape(params['params'])}"
-    p "PARAMS: #{URI.unescape(params[:params])}"
-    p "BOTH: #{JSON.parse(URI.unescape(params[:params]))}"    
+    params = JSON.parse(URI.unescape(params[:params]))
     # Validate url
     unless params[:child] && current_user.current_graph.valid_url?(params[:child][:url])
       respond_to do |format|
