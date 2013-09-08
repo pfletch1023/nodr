@@ -171,8 +171,11 @@ class GraphsController < ApplicationController
   
   # Return recommendations
   def node_recommendations
-    node = Node.find(params[:id])
-    links = node.links_from.group_by{|l| l.id}
+    recommendations = Node.find(params[:id]).get_recommendations
+    respond_to do |format|
+      format.html { redirect_to :root }
+      format.json { render json: recommendations }
+    end
   end
   
 end
