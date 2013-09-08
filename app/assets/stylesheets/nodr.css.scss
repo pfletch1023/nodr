@@ -97,7 +97,8 @@ h1, h2, h3, h4, h5, h6 {
       font-family: 'pacificoregular';
     }
     color: #333;
-    background: #abc;
+    background: url("../images/pennappsf13.jpg") center;
+    background-size: cover;
     .btn {
       background-color: #45ADA8;
       border-color: darken(#45ADA8, 3%);
@@ -107,3 +108,10 @@ h1, h2, h3, h4, h5, h6 {
     padding: 2em;
   }
 }
+#footer {
+  text-align: center;
+  color: #888;
+  padding-bottom: 30px;
+
+}
+
