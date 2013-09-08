@@ -120,6 +120,8 @@ jQuery ->
 				nodes = data["nodes"]
 				edges = data["edges"]
 				weights = data["weights"]
+				console.log nodes
+				console.log weights
 				weightMax = 0
 				for id,w of weights
 					if w > weightMax
