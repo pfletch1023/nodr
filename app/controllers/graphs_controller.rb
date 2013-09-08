@@ -77,14 +77,14 @@ class GraphsController < ApplicationController
     end
     
     # Validate url
-    unless current_user.current_graph.valid_url?(attrs["url"])
+    unless current_user.current_graph.valid_url?(clean_url(attrs["url"]))
       respond_to do |format|
         format.html { return redirect_to :root }
         format.json { return render json: { error: "URL is blacklisted" }, status: :unprocessable_entity }
       end
     else
       # Find or create node
-      if node = Node.get_node(attrs["url"], attrs["title"])
+      if node = Node.get_node(clean_url(attrs["url"]), attrs["title"])
         last_node = current_user.current_graph.nodes.sort{ |a,b| a.updated_at <=> b.updated_at }.last
         node.touch
         # Create link between last node and node (SOFT)
@@ -129,14 +129,14 @@ class GraphsController < ApplicationController
     attrs = JSON.parse(params['params'])
     
     # Validate url
-    unless attrs["child"] && current_user.current_graph.valid_url?(attrs["child"]["url"])
+    unless attrs["child"] && current_user.current_graph.valid_url?(clean_url(attrs["child"]["url"]))
       respond_to do |format|
         format.html { return redirect_to :root }
         format.json { return render json: { error: "URL is blacklisted" }, status: :unprocessable_entity }
       end
     else
       # Find or create parent
-      parent_url = attrs["parent"]["url"]
+      parent_url = clean_url(attrs["child"]["url"])
       parent = Node.where(url: parent_url).first
       unless parent
         parent = Node.new(url: parent_url, title: attrs["parent"]["title"])
@@ -149,7 +149,7 @@ class GraphsController < ApplicationController
       end
     
       # Find or create child
-      child_url = attrs["child"]["url"]
+      child_url = clean_url(attrs["child"]["url"])
       child = Node.where(url: child_url).first
       unless child
         child = Node.new(url: child_url, title: attrs["child"]["title"])
