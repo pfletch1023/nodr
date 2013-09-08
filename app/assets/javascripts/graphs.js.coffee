@@ -34,7 +34,7 @@ jQuery ->
 		diff = 2*Math.PI / numE
 		offset = if first then 0 else 1
 		for edge, i in toAdd
-			if not nodeExists(edge.child_id)
+			if edge.child_id and not nodeExists(edge.child_id)
 				coords[coordsN][edge.child_id] = vectorAdd(coords[coordsN][node.id].x, coords[coordsN][node.id].y, coords[coordsN][node.id].o, diff * (i + offset))
 				queue.push edge.child_id
 
@@ -114,11 +114,14 @@ jQuery ->
 					ns = event.content
 					sigInst.iterNodes (n) ->
 						if ns.indexOf(n.id) >= 0
-							window.open(n.attr['url'],'_blank');
+							window.open(n.attr['url'],'_blank')
+					sigInst.draw()
 
 				nodes = data["nodes"]
 				edges = data["edges"]
 				weights = data["weights"]
+				console.log nodes
+				console.log weights
 				weightMax = 0
 				for id,w of weights
 					if w > weightMax

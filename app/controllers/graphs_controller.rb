@@ -1,7 +1,7 @@
 class GraphsController < ApplicationController
   
   before_filter :authenticated
-  before_filter :check_current_graph, except: [:new, :index]
+  before_filter :check_current_graph, except: [:new, :index, :show]
   
   # Check for current_graph
   def check_current_graph
@@ -41,7 +41,7 @@ class GraphsController < ApplicationController
     @graph = Graph.find(params[:id])
 
     graph = Graph.find(params[:id])
-    nodes = graph.nodes.sort { |a,b| a.created_at <=> b.created_at }
+    nodes = graph.nodes.sort { |a,b| a.updated_at <=> b.updated_at }
     edges = graph.links
     weights = graph.weights
 
@@ -80,10 +80,11 @@ class GraphsController < ApplicationController
     else
       # Find or create node
       if node = Node.get_node(attrs["url"], attrs["title"])
-        
+        last_node = current_user.current_graph.nodes.sort{ |a,b| a.updated_at <=> b.updated_at }.last
+        node.touch
         # Create link between last node and node (SOFT)
         # 0.4 link_type = soft link
-        if last_node = current_user.current_graph.nodes.last
+        if last_node
           link = Link.new(graph_id: current_user.current_graph.id, link_type: 0)
           link.parent = last_node
           link.child = node
