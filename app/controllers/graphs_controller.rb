@@ -3,6 +3,7 @@ class GraphsController < ApplicationController
   before_filter :authenticated
   before_filter :check_current_graph, except: ["new"]
   
+  # Check for current_graph
   def check_current_graph
     unless current_user.current_graph
       respond_to do |format|
@@ -12,6 +13,8 @@ class GraphsController < ApplicationController
     end
   end
   
+  # Initiate new graph
+  # Unless current graph exists
   def new
     unless current_user.current_graph
       graph = Graph.create(user_id: current_user.id)
@@ -27,6 +30,7 @@ class GraphsController < ApplicationController
     end
   end
   
+  # Show graph
   def show
     @graph = Graph.find(params[:id])
 
@@ -40,6 +44,7 @@ class GraphsController < ApplicationController
     end
   end
   
+  # Stop graph (add end_at atrtibute)
   def end_graph
     graph = current_user.current_graph
     graph.end_at = DateTime.now()
@@ -51,9 +56,13 @@ class GraphsController < ApplicationController
     end
   end
   
+  # New node (soft node)
+  # Connected to last added node in the graph
   def new_node
     # Parse attributes
-    attrs = JSON.parse(params['params'])
+    if !params.empty?
+      attrs = JSON.parse(params['params'])
+    end
     
     # Validate url
     unless current_user.current_graph.valid_url?(attrs["url"])
@@ -63,21 +72,33 @@ class GraphsController < ApplicationController
       end
     else
       # Find or create node
-      node = Node.where(url: attrs["url"]).first
-      unless node
-        node = Node.new(title: attrs["title"], url: attrs["url"])
-      end
-      
-      if node.save
-        # Create null link
-        null_link = Link.new(graph_id: current_user.current_graph.id)
-        null_link.parent = node
-        respond_to do |format|
-          format.html { redirect_to :root }
-          if null_link.save
-            format.json { render json: node }
-          else
-            format.json { render json: null_link.errors, status: :unprocessable_entity }
+      if node = Node.get_node(attrs["url"], attrs["title"])
+        
+        # Create link between last node and node (SOFT)
+        # 0.4 value = soft link
+        if last_node = current_user.current_graph.nodes.last
+          link = Link.new(graph_id: current_user.current_graph.id, value: 0.4)
+          link.parent = last_node
+          link.child = node
+          respond_to do |format|
+            format.html { redirect_to :root }
+            if link.save
+              format.json { render json: link }
+            else
+              format.json { render json: link.errors, status: :unprocessable_entity }
+            end
+          end
+        else
+          # Create null link
+          null_link = Link.new(graph_id: current_user.current_graph.id)
+          null_link.parent = node
+          respond_to do |format|
+            format.html { redirect_to :root }
+            if null_link.save
+              format.json { render json: node }
+            else
+              format.json { render json: null_link.errors, status: :unprocessable_entity }
+            end
           end
         end
       else
@@ -89,6 +110,7 @@ class GraphsController < ApplicationController
     end
   end
   
+  # New link between two nodes (nodes specified)
   def new_link
     # Parse attributes
     attrs = JSON.parse(params['params'])
@@ -127,7 +149,7 @@ class GraphsController < ApplicationController
       end
     
       # Create link between parent and child
-      link = Link.new(child_id: child.id, graph_id: current_user.current_graph.id)
+      link = Link.new(child_id: child.id, value: 1.0, graph_id: current_user.current_graph.id)
       link.parent = parent
       respond_to do |format|
         format.html { redirect_to :root }
@@ -140,6 +162,7 @@ class GraphsController < ApplicationController
     end
   end
   
+  # Return recommendations
   def node_recommendations
     node = Node.find(params[:id])
     links = node.links_from.group_by{|l| l.id}
