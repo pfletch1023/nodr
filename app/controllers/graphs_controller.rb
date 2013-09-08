@@ -52,6 +52,8 @@ class GraphsController < ApplicationController
   end
   
   def new_node
+    p "PARAMS: #{params}"
+    p "PARAMS: #{params['params']}"
     params = JSON.parse(URI.unescape(params["params"]))
     
     # Validate url
