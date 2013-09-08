@@ -54,7 +54,7 @@ class GraphsController < ApplicationController
   def new_node
     p "PARAMS: #{params}"
     p "PARAMS: #{params['params']}"
-    params = JSON.parse(URI.unescape(params["params"]))
+    params = JSON.parse(URI.unescape(params['params']))
     
     # Validate url
     unless current_user.current_graph.valid_url?(params[:url])
