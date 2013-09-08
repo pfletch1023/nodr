@@ -56,7 +56,6 @@ class GraphsController < ApplicationController
     attrs = JSON.parse(params['params'])
     
     # Validate url
-    p "URL: #{attrs["url"]}, TITLE: #{attrs["title"]}"
     unless current_user.current_graph.valid_url?(attrs["url"])
       respond_to do |format|
         format.html { return redirect_to :root }
@@ -91,20 +90,21 @@ class GraphsController < ApplicationController
   end
   
   def new_link
-    params = JSON.parse(URI.unescape(params["params"]))
+    # Parse attributes
+    attrs = JSON.parse(params['params'])
     
     # Validate url
-    unless params[:child] && current_user.current_graph.valid_url?(params[:child][:url])
+    unless attrs["child"] && current_user.current_graph.valid_url?(attrs["child"]["url"])
       respond_to do |format|
         format.html { return redirect_to :root }
         format.json { return render json: { error: "URL is blacklisted" }, status: :unprocessable_entity }
       end
     else
       # Find or create parent
-      parent_url = params[:parent][:url]
+      parent_url = attrs["parent"]["url"]
       parent = Node.where(url: parent_url).first
       unless parent
-        parent = Node.new(url: parent_url, title: params[:parent][:title])
+        parent = Node.new(url: parent_url, title: attrs["parent"]["title"])
         unless parent.save
           respond_to do |format|
             format.html { redirect_to :root }
@@ -114,10 +114,10 @@ class GraphsController < ApplicationController
       end
     
       # Find or create child
-      child_url = params[:child][:url]
+      child_url = attrs["child"]["url"]
       child = Node.where(url: child_url).first
       unless child
-        child = Node.new(url: child_url, title: params[:child][:title])
+        child = Node.new(url: child_url, title: attrs["child"]["title"])
         unless child.save
           respond_to do |format|
             format.html { redirect_to :root }
