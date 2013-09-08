@@ -138,8 +138,6 @@ jQuery ->
 						rangeX = if maxX - minX is 0 then 1 else maxX - minX
 						rangeY = if maxY - minY is 0 then 1 else maxY - minY
 						for k,v of coords[coordsN]
-							console.log "x: " + (v.x - minX) / rangeX
-							console.log "y: " + (v.y - minY) / rangeY
 							n = findNode(nodes, parseInt(k))
 							sigInst.addNode n.id,
 								label: n.title,

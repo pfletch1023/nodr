@@ -1,7 +1,7 @@
 class GraphsController < ApplicationController
   
   before_filter :authenticated
-  before_filter :check_current_graph, except: ["new"]
+  before_filter :check_current_graph, except: [:new, :index]
   
   # Check for current_graph
   def check_current_graph
@@ -11,6 +11,12 @@ class GraphsController < ApplicationController
         format.json { return render json: { error: "No current graph exists" }, status: :forbidden }
       end
     end
+  end
+
+  # Display list of graphs
+  def index
+    @graphs = current_user.graphs
+    @current_graph = current_user.current_graph
   end
   
   # Initiate new graph
