@@ -45,6 +45,7 @@ jQuery ->
 			dataType: "json",
 			success: (data) ->
 				mainColor = Math.floor(Math.random() * 360)
+				secondColor = if mainColor >= 180 then mainColor - 180 + Math.floor(Math.random() * 120 - 60) else mainColor + 180 + Math.floor(Math.random() * 120 - 60)
 
 				sigma.publicPrototype.degreeToSize = ->
 					biggest = 0
@@ -55,9 +56,11 @@ jQuery ->
 					this.iterNodes (node) ->
 						node.color = tinycolor("hsv(" + mainColor + ", " + (Math.floor(100 * node.degree / biggest)) + "%, " + (Math.floor(100 * node.degree / biggest)) + "%)").toHex()
 					this.drawingProperties
-						labelThreshold: biggest * 2
+						labelThreshold: biggest * 10
 
 				sigRoot = document.getElementById('sig')
+				ratio = $(sigRoot).width() / $(sigRoot).height()
+				console.log(ratio)
 				sigInst = sigma.init(sigRoot)
 
 				sigInst.drawingProperties
@@ -139,17 +142,20 @@ jQuery ->
 						rangeY = if maxY - minY is 0 then 1 else maxY - minY
 						for k,v of coords[coordsN]
 							n = findNode(nodes, parseInt(k))
+							x = if ratio >= 1 then (v.x - minX) / rangeX * ratio - ratio / 2 else (v.x - minX) / rangeX
+							y = if ratio <= 1 then (v.y - minY) / rangeY * ratio - ratio / 2 else (v.y - minY) / rangeY
 							sigInst.addNode n.id,
 								label: n.title,
-								x: (v.x - minX) / rangeX,
-								y: (v.y - minY) / rangeY,
+								x: x * 0.8,
+								y: y * 0.8,
 								url: n.url,
 								group: coordsN
 						for edge in edges
 							if nodeExists(edge.parent_id) and nodeExists(edge.child_id)
+								toColor = if edge.link_type is 0 then tinycolor("hsv(" + secondColor + ", 30%, 30%)").toHex() else tinycolor("hsv(" + secondColor + ", 100%, 100%)").toHex()
 								sigInst.addEdge edge.parent_id + '-' + edge.child_id, edge.parent_id, edge.child_id,
-									size: 2
-				console.log coords
+									size: 3
+									color: toColor
 
 				sigInst.degreeToSize()
 				sigInst.activateFishEye().draw()

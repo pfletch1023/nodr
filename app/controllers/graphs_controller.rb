@@ -40,7 +40,7 @@ class GraphsController < ApplicationController
   def show
     @graph = Graph.find(params[:id])
 
-    graph = current_user.current_graph
+    graph = Graph.find(params[:id])
     nodes = graph.nodes
     edges = graph.links
 

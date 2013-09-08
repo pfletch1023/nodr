@@ -13,7 +13,7 @@ Node.all.each { |x| x.destroy }
 def babies(g, s, r)
 	nodes = FactoryGirl.create_list(:node, rand(r))
 	nodes.each do |node|
-		FactoryGirl.create(:link, graph: g, parent: s, child: node)
+		FactoryGirl.create(:link, graph: g, parent: s, child: node, link_type: rand(2))
 		babies(g, node, r - 1)
 	end
 end
