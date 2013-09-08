@@ -1,7 +1,7 @@
 class Link < ActiveRecord::Base
   
-  SOFT = 0.4
-  HARD = 1.0
+  SOFT = 0
+  HARD = 1
   
   attr_accessible :parent_id, :child_id, :graph_id, :list_type
   
