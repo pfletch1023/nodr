@@ -60,7 +60,6 @@ jQuery ->
 
 				sigRoot = document.getElementById('sig')
 				ratio = $(sigRoot).width() / $(sigRoot).height()
-				console.log(ratio)
 				sigInst = sigma.init(sigRoot)
 
 				sigInst.drawingProperties
@@ -119,6 +118,11 @@ jQuery ->
 
 				nodes = data["nodes"]
 				edges = data["edges"]
+				weights = data["weights"]
+				weightMax = 0
+				for id,w of weights
+					if w > weightMax
+						weightMax = w
 
 				for node in nodes
 					if not coords[coordsN] and not nodeExists(node.id) and queue.length is 0
@@ -154,7 +158,7 @@ jQuery ->
 							if nodeExists(edge.parent_id) and nodeExists(edge.child_id)
 								toColor = if edge.link_type is 0 then tinycolor("hsv(" + secondColor + ", 30%, 30%)").toHex() else tinycolor("hsv(" + secondColor + ", 100%, 100%)").toHex()
 								sigInst.addEdge edge.parent_id + '-' + edge.child_id, edge.parent_id, edge.child_id,
-									size: 3
+									size: weights[edge.id] / weightMax * 21
 									color: toColor
 
 				sigInst.degreeToSize()
