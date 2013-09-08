@@ -4,10 +4,10 @@ Nodr::Application.routes.draw do
   resources :graphs, :listed_urls
 
   match "/admin" => "admin#hub"
-  match "/login" => "sessions#new"
+  match "/login" => "sessions#new", :as => :login
   match "/auth/:provider/callback" => "sessions#create"
   match "/logout" => "sessions#destroy", :as => :signout
-  match "/user" => "sessions#user"
+  match "/pref" =>  "sessions#pref"
   
   # Graphs controller routes  
   match "/new_graph" => "graphs#new"

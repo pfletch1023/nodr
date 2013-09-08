@@ -23,7 +23,7 @@ jQuery ->
 		font: 'Century Gothic',
 		defaultEdgeType: 'curve'
 	sigInst.graphProperties
-		minNodeSize: 3,
+		minNodeSize: 4,
 		maxNodeSize: 10
 	sigInst.mouseProperties
 	  mouseEnabled: false

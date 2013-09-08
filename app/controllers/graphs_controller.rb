@@ -140,4 +140,9 @@ class GraphsController < ApplicationController
     end
   end
   
+  def node_recommendations
+    node = Node.find(params[:id])
+    links = node.links_from.group_by{|l| l.id}
+  end
+  
 end

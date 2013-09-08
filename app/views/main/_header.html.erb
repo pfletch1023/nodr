@@ -1,10 +1,35 @@
-<div id="sessions-bar">
-  <div id="sessions">
-    <% if current_user %>
-      <%= image_tag(current_user.avatar, size: "40x40", alt: "Avatar") %>
-      <%= link_to (current_user.first_name + " " + current_user.last_name), root_path %>
-      <%= link_to "Logout", signout_path, id: "sign_out" %>
-    <% end %>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">Nodr</a>
   </div>
-</div>
-			
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+      <% if current_user %>
+      <li><%= link_to "Graphs", root_path %></li>
+      <li><%= link_to "Preferences", pref_path %></li>
+      <% end %>
+    </ul>
+
+    <div class="navbar-text pull-right">
+      <ul class="nav navbar-nav">
+        <% if current_user %>
+          <li><%= link_to (current_user.first_name + " " + current_user.last_name), root_path %></li>
+          <li><%= link_to "Logout", signout_path, id: "sign_out" %></li>
+        </ul>
+        <%= image_tag(current_user.avatar, size: "50x50", alt: "Avatar") %>
+      <% else %>
+        <li><%= link_to "Login", "auth/facebook", id: "login" %></li>
+      </ul>
+      <% end %>
+    </div>
+  </div><!-- /.navbar-collapse -->
+</nav>
