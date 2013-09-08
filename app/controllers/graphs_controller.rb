@@ -1,7 +1,7 @@
 class GraphsController < ApplicationController
   
   before_filter :authenticated
-  before_filter :check_current_graph, except: [:new, :index]
+  before_filter :check_current_graph, except: [:new, :index, :show]
   
   # Check for current_graph
   def check_current_graph

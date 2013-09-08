@@ -114,7 +114,8 @@ jQuery ->
 					ns = event.content
 					sigInst.iterNodes (n) ->
 						if ns.indexOf(n.id) >= 0
-							window.open(n.attr['url'],'_blank');
+							window.open(n.attr['url'],'_blank')
+					sigInst.draw()
 
 				nodes = data["nodes"]
 				edges = data["edges"]
