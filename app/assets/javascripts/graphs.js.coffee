@@ -114,7 +114,6 @@ jQuery ->
 						if ns.indexOf(n.id) >= 0
 							window.open(n.attr['url'],'_blank');
 
-				graph = data["graph"]
 				nodes = data["nodes"]
 				edges = data["edges"]
 

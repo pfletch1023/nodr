@@ -1,13 +1,12 @@
 class SessionsController < ApplicationController
   
 	def new
-		graph = Graph.last
-	    nodes = graph.nodes.sort { |a,b| a.created_at <=> b.created_at }
-	    edges = graph.links
+	  nodes = Node.all.sort { |a,b| a.created_at <=> b.created_at }
+	  edges = Link.all
 
        respond_to do |format|
          format.html
-         format.json { render json: { graph: graph, nodes: nodes, edges: edges } }
+         format.json { render json: { nodes: nodes, edges: edges } }
        end
 	end
   
@@ -23,4 +22,9 @@ class SessionsController < ApplicationController
 		reset_session
 		redirect_to :root, :notice => "Signed out!"
 	end
+	
+	def user
+	  render json: current_user
+	end
+	
 end
