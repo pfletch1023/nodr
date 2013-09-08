@@ -26,9 +26,9 @@ EdgeWeight.all.each { |x| x.destroy }
 
 # babies(graph, start, random)
 
-g = FactoryGirl.create(:graph)
-a = FactoryGirl.create(:node, url: "http://en.wikipedia.org/wiki/Bubble_tea")
-b = FactoryGirl.create(:node, url: "http://travel.cnn.com/explorations/drink/inventor-bubble-tea-885732")
-c = FactoryGirl.create(:node, url: "http://www.huffingtonpost.com/2013/09/07/1-percent-tea-party_n_3887348.html?utm_hp_ref=politics")
-FactoryGirl.create(:link, parent: a, child: b, graph: g, link_type: 0)
-FactoryGirl.create(:link, parent: a, child: c, graph: g, link_type: 1)
+# g = FactoryGirl.create(:graph)
+# a = FactoryGirl.create(:node, url: "http://en.wikipedia.org/wiki/Bubble_tea")
+# b = FactoryGirl.create(:node, url: "http://travel.cnn.com/explorations/drink/inventor-bubble-tea-885732")
+# c = FactoryGirl.create(:node, url: "http://www.huffingtonpost.com/2013/09/07/1-percent-tea-party_n_3887348.html?utm_hp_ref=politics")
+# FactoryGirl.create(:link, parent: a, child: b, graph: g, link_type: 0)
+# FactoryGirl.create(:link, parent: a, child: c, graph: g, link_type: 1)

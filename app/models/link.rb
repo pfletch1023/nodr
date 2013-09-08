@@ -25,18 +25,17 @@ class Link < ActiveRecord::Base
   end
 
   def relation_factor
-  	# p_results = AlchemyAPI::KeywordExtraction.new.search(url: self.parent.url)
-  	# c_results = AlchemyAPI::KeywordExtraction.new.search(url: self.child.url)
-  	# rf = 0
-  	# p_results.each do |pr|
-  	# 	c_results.each do |cr|
-  	# 		if pr["text"] == cr["text"]
-  	# 			rf += pr["relevance"].to_f + cr["relevance"].to_f
-  	# 		end
-  	# 	end
-  	# end
-  	# rf
-    rf = 0
+  	p_results = AlchemyAPI::KeywordExtraction.new.search(url: self.parent.url)
+  	c_results = AlchemyAPI::KeywordExtraction.new.search(url: self.child.url)
+  	rf = 0
+  	p_results.each do |pr|
+  		c_results.each do |cr|
+  			if pr["text"] == cr["text"]
+  				rf += pr["relevance"].to_f + cr["relevance"].to_f
+  			end
+  		end
+  	end
+  	rf
   end
   
 end
