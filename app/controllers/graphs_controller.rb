@@ -178,7 +178,9 @@ class GraphsController < ApplicationController
   # Return recommendations
   def node_recommendations
     node = Node.where(url: clean_url(params["url"])).first
-    render json: node.get_recommendations
+    if node
+      render json: node.get_recommendations
+    end
   end
   
 end
