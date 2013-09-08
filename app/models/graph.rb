@@ -20,5 +20,15 @@ class Graph < ActiveRecord::Base
     end
     return true
   end
+
+  def weights
+    w = {}
+    self.links.each do |link|
+      if link.child
+        w[link.id] = EdgeWeight.where(parent_id: link.parent.id, child_id: link.child.id).first.value
+      end
+    end
+    w
+  end
   
 end

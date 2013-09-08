@@ -27,4 +27,8 @@ class Node < ActiveRecord::Base
     return node
   end
   
+  def get_recommendations
+    recs = EdgeWeight.where(parent_id: self.id).order("value DESC")
+    recs.map! { |rec| { url: rec.child.url, title: rec.child.title } }
+  end
 end

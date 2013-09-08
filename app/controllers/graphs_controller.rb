@@ -1,7 +1,7 @@
 class GraphsController < ApplicationController
   
   before_filter :authenticated
-  before_filter :check_current_graph, except: ["new"]
+  before_filter :check_current_graph, except: [:new, :index]
   
   # Check for current_graph
   def check_current_graph
@@ -11,6 +11,12 @@ class GraphsController < ApplicationController
         format.json { return render json: { error: "No current graph exists" }, status: :forbidden }
       end
     end
+  end
+
+  # Display list of graphs
+  def index
+    @graphs = current_user.graphs
+    @current_graph = current_user.current_graph
   end
   
   # Initiate new graph
@@ -34,13 +40,14 @@ class GraphsController < ApplicationController
   def show
     @graph = Graph.find(params[:id])
 
-    graph = current_user.current_graph
-    nodes = graph.nodes
+    graph = Graph.find(params[:id])
+    nodes = graph.nodes.sort { |a,b| a.created_at <=> b.created_at }
     edges = graph.links
+    weights = graph.weights
 
     respond_to do |format|
       format.html
-      format.json { render json: { graph: graph, nodes: nodes, edges: edges } }
+      format.json { render json: { graph: graph, nodes: nodes, edges: edges, weights: weights } }
     end
   end
   
@@ -77,7 +84,7 @@ class GraphsController < ApplicationController
         # Create link between last node and node (SOFT)
         # 0.4 link_type = soft link
         if last_node = current_user.current_graph.nodes.last
-          link = Link.new(graph_id: current_user.current_graph.id, list_type: 0)
+          link = Link.new(graph_id: current_user.current_graph.id, link_type: 0)
           link.parent = last_node
           link.child = node
           respond_to do |format|
@@ -149,7 +156,7 @@ class GraphsController < ApplicationController
       end
     
       # Create link between parent and child
-      link = Link.new(child_id: child.id, list_type: 1, graph_id: current_user.current_graph.id)
+      link = Link.new(child_id: child.id, link_type: 1, graph_id: current_user.current_graph.id)
       link.parent = parent
       respond_to do |format|
         format.html { redirect_to :root }
@@ -164,8 +171,11 @@ class GraphsController < ApplicationController
   
   # Return recommendations
   def node_recommendations
-    node = Node.find(params[:id])
-    links = node.links_from.group_by{|l| l.id}
+    recommendations = Node.find(params[:id]).get_recommendations
+    respond_to do |format|
+      format.html { redirect_to :root }
+      format.json { render json: recommendations }
+    end
   end
   
 end

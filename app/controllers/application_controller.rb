@@ -10,7 +10,9 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticated
+    p current_user
     if current_user.nil? || current_user && current_user.fb_expired?
+      p "fuck"
       reset_session
       respond_to do |format|
         format.html { redirect_to login_path }
