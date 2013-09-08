@@ -56,17 +56,17 @@ class GraphsController < ApplicationController
     attrs = JSON.parse(params['params'])
     
     # Validate url
-    p "URL: #{attrs[:url]}, TITLE: #{attrs[:title]}"
-    unless current_user.current_graph.valid_url?(attrs[:url])
+    p "URL: #{attrs["url"]}, TITLE: #{attrs["title"]}"
+    unless current_user.current_graph.valid_url?(attrs["url"])
       respond_to do |format|
         format.html { return redirect_to :root }
         format.json { return render json: { error: "URL is blacklisted" }, status: :unprocessable_entity }
       end
     else
       # Find or create node
-      node = Node.where(url: attrs[:url]).first
+      node = Node.where(url: attrs["url"]).first
       unless node
-        node = Node.new(title: attrs[:title], url: attrs[:url])
+        node = Node.new(title: attrs["title"], url: attrs["url"])
       end
       
       if node.save
