@@ -11,9 +11,6 @@ class SessionsController < ApplicationController
        end
 	end
   
-  def pref
-  end
-  
 	def create
 		user = User.from_omniauth(env["omniauth.auth"])
 		session[:user_id] = user.id
