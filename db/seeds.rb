@@ -6,17 +6,21 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-n_n = 3
-n_l = 5
+Graph.all.each { |x| x.destroy }
+Link.all.each { |x| x.destroy }
+Node.all.each { |x| x.destroy }
 
-g = FactoryGirl.create(:graph)
-ns = FactoryGirl.create_list(:node, n_n)
-n_l.times do
-	parent = rand(n_n)
-	child = rand(n_n)
-	while child == parent || g.links.where(parent_id: ns[parent].id, child_id: ns[child].id).count > 0
-		child = rand(n_n)
-		parent = rand(n_n)
+def babies(g, s, r)
+	nodes = FactoryGirl.create_list(:node, rand(r))
+	nodes.each do |node|
+		FactoryGirl.create(:link, graph: g, parent: s, child: node)
+		babies(g, node, r - 1)
 	end
-	FactoryGirl.create(:link, graph: g, parent: ns[parent], child: ns[child])
 end
+
+graph = FactoryGirl.create(:graph)
+start = FactoryGirl.create(:node)
+
+random = 6
+
+babies(graph, start, random)

@@ -28,14 +28,15 @@ jQuery ->
 			coords[coordsN][node.id] = { x: 0, y: 0, o: Math.PI }
 		toAdd = []
 		for edge in edges
-			if edge.parent_id is node.id and not nodeExists(edge.child_id)
+			if edge.parent_id is node.id
 				toAdd.push edge
 		numE = if first then toAdd.length else toAdd.length + 1
 		diff = 2*Math.PI / numE
 		offset = if first then 0 else 1
 		for edge, i in toAdd
-			coords[coordsN][edge.child_id] = vectorAdd(coords[coordsN][node.id].x, coords[coordsN][node.id].y, coords[coordsN][node.id].o, diff * (i + offset))
-			queue.push edge.child_id
+			if not nodeExists(edge.child_id)
+				coords[coordsN][edge.child_id] = vectorAdd(coords[coordsN][node.id].x, coords[coordsN][node.id].y, coords[coordsN][node.id].o, diff * (i + offset))
+				queue.push edge.child_id
 
 	sigRoot = document.getElementById('sig')
 	sigInst = sigma.init(sigRoot)
@@ -67,12 +68,11 @@ jQuery ->
 					defaultLabelBGColor: '#fff',
 					defaultLabelHoverColor: '#000',
 					font: 'Century Gothic',
-					defaultEdgeType: 'curve'
 				sigInst.graphProperties
 					minNodeSize: 1,
 					maxNodeSize: 10
 				sigInst.mouseProperties
-					mouseEnabled: false
+					mouseEnabled: true
 
 				greyColor = "#444"
 				sigInst.bind('overnodes', (event) ->
@@ -141,6 +141,8 @@ jQuery ->
 						rangeX = if maxX - minX is 0 then 1 else maxX - minX
 						rangeY = if maxY - minY is 0 then 1 else maxY - minY
 						for k,v of coords[coordsN]
+							console.log "x: " + (v.x - minX) / rangeX
+							console.log "y: " + (v.y - minY) / rangeY
 							n = findNode(nodes, parseInt(k))
 							sigInst.addNode n.id,
 								label: n.title,
@@ -148,10 +150,12 @@ jQuery ->
 								y: (v.y - minY) / rangeY,
 								url: n.url,
 								group: coordsN
+						for edge in edges
+							if nodeExists(edge.parent_id) and nodeExists(edge.child_id)
+								sigInst.addEdge edge.parent_id + '-' + edge.child_id, edge.parent_id, edge.child_id,
+									size: 2
+				console.log coords
 
-				for edge in edges
-					sigInst.addEdge edge.parent_id + '-' + edge.child_id, edge.parent_id, edge.child_id,
-						size: 2
 				sigInst.degreeToSize()
 				sigInst.activateFishEye().draw()
 
