@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130908032938) do
+ActiveRecord::Schema.define(:version => 20130908044323) do
 
   create_table "edge_weights", :force => true do |t|
     t.integer "parent_id"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20130908032938) do
     t.integer  "graph_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.float    "value"
+    t.integer  "link_type"
   end
 
   create_table "listed_urls", :force => true do |t|

@@ -75,9 +75,9 @@ class GraphsController < ApplicationController
       if node = Node.get_node(attrs["url"], attrs["title"])
         
         # Create link between last node and node (SOFT)
-        # 0.4 value = soft link
+        # 0.4 link_type = soft link
         if last_node = current_user.current_graph.nodes.last
-          link = Link.new(graph_id: current_user.current_graph.id, value: 0.4)
+          link = Link.new(graph_id: current_user.current_graph.id, list_type: 0)
           link.parent = last_node
           link.child = node
           respond_to do |format|
@@ -149,7 +149,7 @@ class GraphsController < ApplicationController
       end
     
       # Create link between parent and child
-      link = Link.new(child_id: child.id, value: 1.0, graph_id: current_user.current_graph.id)
+      link = Link.new(child_id: child.id, list_type: 1, graph_id: current_user.current_graph.id)
       link.parent = parent
       respond_to do |format|
         format.html { redirect_to :root }
