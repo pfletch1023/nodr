@@ -1,18 +1,14 @@
 class SessionsController < ApplicationController
   
 	def new
-    graph = Graph.last
-       nodes = graph.nodes
-       edges = graph.links
+	  nodes = Node.all.sort { |a,b| a.created_at <=> b.created_at }
+	  edges = Link.all
 
        respond_to do |format|
          format.html
-         format.json { render json: { graph: graph, nodes: nodes, edges: edges } }
+         format.json { render json: { nodes: nodes, edges: edges } }
        end
 	end
-  
-  def pref
-  end
   
 	def create
 		user = User.from_omniauth(env["omniauth.auth"])
