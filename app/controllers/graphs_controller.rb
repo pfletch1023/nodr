@@ -180,6 +180,8 @@ class GraphsController < ApplicationController
     node = Node.where(url: clean_url(params["url"])).first
     if node
       render json: node.get_recommendations
+    else
+      render json: []
     end
   end
   
