@@ -1,5 +1,8 @@
 class Link < ActiveRecord::Base
   
+  SOFT = 0
+  HARD = 1
+  
   attr_accessible :parent_id, :child_id, :graph_id, :link_type
   
   belongs_to :parent, foreign_key: :parent_id, class_name: "Node"
