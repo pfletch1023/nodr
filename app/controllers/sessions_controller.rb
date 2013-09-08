@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   
 	def new
 		graph = Graph.last
-	    nodes = graph.nodes
+	    nodes = graph.nodes.sort { |a,b| a.created_at <=> b.created_at }
 	    edges = graph.links
 
 	    respond_to do |format|

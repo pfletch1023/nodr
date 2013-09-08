@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-n_n = 20
-n_l = 50
+n_n = 3
+n_l = 5
 
 g = FactoryGirl.create(:graph)
 ns = FactoryGirl.create_list(:node, n_n)

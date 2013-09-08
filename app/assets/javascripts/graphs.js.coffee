@@ -1,6 +1,44 @@
 jQuery ->
 
-	sigInst = sigma.init(document.getElementById('sig'))
+	coords = []
+	coordsN = -1
+	queue = []
+
+	vectorAdd = (x, y, i, o) ->
+		a = if i >= Math.PI then i - Math.PI + o else i + Math.PI + o
+		a = if a >= 2*Math.PI then a - 2*Math.PI else a
+		{ x: x + Math.cos(a), y: y + Math.sin(a), o: a }
+
+	findNode = (nodes, i) ->
+		for node in nodes
+			if node.id is i
+				return node
+
+	nodeExists = (i) ->
+		exists = false
+		for c in coords
+			if c[i]
+				exists = true
+		return exists
+
+	bfs = (node, edges, first) ->
+		if first
+			coordsN++
+			coords.push {}
+			coords[coordsN][node.id] = { x: 0, y: 0, o: Math.PI }
+		toAdd = []
+		for edge in edges
+			if edge.parent_id is node.id and not nodeExists(edge.child_id)
+				toAdd.push edge
+		numE = if first then toAdd.length else toAdd.length + 1
+		diff = 2*Math.PI / numE
+		offset = if first then 0 else 1
+		for edge, i in toAdd
+			coords[coordsN][edge.child_id] = vectorAdd(coords[coordsN][node.id].x, coords[coordsN][node.id].y, coords[coordsN][node.id].o, diff * (i + offset))
+			queue.push edge.child_id
+
+	sigRoot = document.getElementById('sig')
+	sigInst = sigma.init(sigRoot)
 
 	drawGraph = ->
 		$.ajax
@@ -81,12 +119,36 @@ jQuery ->
 				graph = data["graph"]
 				nodes = data["nodes"]
 				edges = data["edges"]
+
 				for node in nodes
-					sigInst.addNode node.id,
-						label: node.title,
-						x: Math.random() * 2 - 1,
-						y: Math.random() * 0.8,
-						url: node.url
+					if not coords[coordsN] and not nodeExists(node.id) and queue.length is 0
+						bfs node, edges, true
+						while queue.length isnt 0
+							bfs findNode(nodes, queue.shift()), edges, false
+						minX = 9001
+						maxX = -9001
+						minY = 9001
+						maxY = -9001
+						for k,v of coords[coordsN]
+							if v.x < minX
+								minX = v.x
+							if v.x > maxX
+								maxX = v.x
+							if v.y < minY
+								minY = v.y
+							if v.y > maxY
+								maxY = v.y
+						rangeX = if maxX - minX is 0 then 1 else maxX - minX
+						rangeY = if maxY - minY is 0 then 1 else maxY - minY
+						for k,v of coords[coordsN]
+							n = findNode(nodes, parseInt(k))
+							sigInst.addNode n.id,
+								label: n.title,
+								x: (v.x - minX) / rangeX,
+								y: (v.y - minY) / rangeY,
+								url: n.url,
+								group: coordsN
+
 				for edge in edges
 					sigInst.addEdge edge.parent_id + '-' + edge.child_id, edge.parent_id, edge.child_id,
 						size: 2
