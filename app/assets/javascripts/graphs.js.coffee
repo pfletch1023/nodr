@@ -85,6 +85,7 @@ jQuery ->
 					y: Math.random() * 0.8,
 					url: node.url
 			for edge in edges
-				sigInst.addEdge edge.parent_id + '-' + edge.child_id, edge.parent_id, edge.child_id
+			  if edge.child_id
+				  sigInst.addEdge edge.parent_id + '-' + edge.child_id, edge.parent_id, edge.child_id
 			sigInst.degreeToSize()
 			sigInst.activateFishEye().draw()
