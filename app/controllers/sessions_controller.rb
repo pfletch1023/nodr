@@ -5,10 +5,10 @@ class SessionsController < ApplicationController
 	    nodes = graph.nodes.sort { |a,b| a.created_at <=> b.created_at }
 	    edges = graph.links
 
-	    respond_to do |format|
-	      format.html
-	      format.json { render json: { graph: graph, nodes: nodes, edges: edges } }
-	    end
+       respond_to do |format|
+         format.html
+         format.json { render json: { graph: graph, nodes: nodes, edges: edges } }
+       end
 	end
   
 	def create

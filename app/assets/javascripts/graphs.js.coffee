@@ -38,9 +38,6 @@ jQuery ->
 				coords[coordsN][edge.child_id] = vectorAdd(coords[coordsN][node.id].x, coords[coordsN][node.id].y, coords[coordsN][node.id].o, diff * (i + offset))
 				queue.push edge.child_id
 
-	sigRoot = document.getElementById('sig')
-	sigInst = sigma.init(sigRoot)
-
 	drawGraph = ->
 		$.ajax
 			method: "GET",
@@ -60,7 +57,8 @@ jQuery ->
 					this.drawingProperties
 						labelThreshold: biggest * 2
 
-				sigInst = sigma.init(document.getElementById('sig'))
+				sigRoot = document.getElementById('sig')
+				sigInst = sigma.init(sigRoot)
 
 				sigInst.drawingProperties
 					defaultLabelColor: '#fff',
@@ -160,11 +158,3 @@ jQuery ->
 				sigInst.activateFishEye().draw()
 
 	drawGraph()
-
-	$(window).resize ->
-		# sigInst.iterEdges (e) ->
-		# 	sigInst.dropEdge(e)
-		# sigInst.iterNodes (n) ->
-		# 	sigInst.dropNode(n)
-		# # $("#sig").empty()
-		# # drawGraph()
