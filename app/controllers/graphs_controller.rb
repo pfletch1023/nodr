@@ -51,6 +51,11 @@ class GraphsController < ApplicationController
     end
   end
   
+  def last_graph
+    graph = current_user.graphs.last
+    redirect_to graph
+  end
+  
   # Stop graph (add end_at atrtibute)
   def end_graph
     graph = current_user.current_graph

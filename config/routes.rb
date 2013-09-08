@@ -19,5 +19,6 @@ Nodr::Application.routes.draw do
   match "/end_graph" => "graphs#end_graph"
   match "/recommendations" => "graphs#node_recommendations"
   match "/graphs/:id/listed_urls/new" => "listed_urls#new", as: "new_listed_url"
+  match "/last_graph" => "graphs#last_graph"
   
 end
